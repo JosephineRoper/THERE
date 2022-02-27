@@ -173,9 +173,9 @@ def connect_poi(pois, nodes, edges, key_col=None, path=None, threshold=200, knn=
         # update features (a bit slow)
         new_edges['length'] = [l.length for l in new_lines]
         new_edges['from'] = new_edges['geometry'].map(
-            lambda x: nodes_id_dict.get(list(wkt.loads(wkt.dumps(x, rounding_precision=6)).coords)[0], None))
+            lambda x: nodes_id_dict.get(list(wkt.loads(wkt.dumps(x, rounding_precision=2)).coords)[0], None))
         new_edges['to'] = new_edges['geometry'].map(
-            lambda x: nodes_id_dict.get(list(wkt.loads(wkt.dumps(x, rounding_precision=6)).coords)[-1], None))
+            lambda x: nodes_id_dict.get(list(wkt.loads(wkt.dumps(x, rounding_precision=2)).coords)[-1], None))
         new_edges['connect_id'] = ['_'.join(list(map(str, s))) for s in zip(new_edges['from'], new_edges['to'])]
         print("Missing 'to' nodes:", len(new_edges[new_edges['to'].isna()]))
         # remember to reindex to prevent duplication when concat
@@ -241,7 +241,7 @@ def connect_poi(pois, nodes, edges, key_col=None, path=None, threshold=200, knn=
     # update nodes
     print("Updating internal nodes...")
     nodes_meter, _ = update_pap_nodes(nodes_meter, list(pois_meter['pp']), meter_epsg=meter_epsg)
-    nodes_coord = nodes_meter['geometry'].map(lambda x: wkt.loads(wkt.dumps(x, rounding_precision=6)).coords[0])
+    nodes_coord = nodes_meter['geometry'].map(lambda x: wkt.loads(wkt.dumps(x, rounding_precision=2)).coords[0])
     nodes_id_dict = dict(zip(nodes_coord, nodes_meter['connect_id'].astype(int)))
 
     # 1-3: update internal edges (split line segments)
