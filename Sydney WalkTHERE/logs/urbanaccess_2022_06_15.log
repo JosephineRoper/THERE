@@ -1,0 +1,810 @@
+2022-06-15 10:26:00,124 INFO urbanaccess Added 1 feeds to gtfs_feeds: {'TfNSW': 'o-gcv-stagecoacheastscotland'}
+2022-06-15 10:27:17,044 INFO urbanaccess data\gtfsfeed_zips does not exist. Directory was created
+2022-06-15 10:27:17,045 INFO urbanaccess 1 GTFS feed(s) will be downloaded here: data\gtfsfeed_zips
+2022-06-15 10:27:17,055 ERROR urbanaccess Unable to connect to: o-gcv-stagecoacheastscotland. Error: Traceback (most recent call last):
+  File "C:\Users\z3258367\Anaconda3\envs\ox\lib\site-packages\urbanaccess\gtfsfeeds.py", line 525, in download
+    file = request.urlopen(feed_url_value)
+  File "C:\Users\z3258367\Anaconda3\envs\ox\lib\urllib\request.py", line 222, in urlopen
+    return opener.open(url, data, timeout)
+  File "C:\Users\z3258367\Anaconda3\envs\ox\lib\urllib\request.py", line 509, in open
+    req = Request(fullurl, data)
+  File "C:\Users\z3258367\Anaconda3\envs\ox\lib\urllib\request.py", line 328, in __init__
+    self.full_url = url
+  File "C:\Users\z3258367\Anaconda3\envs\ox\lib\urllib\request.py", line 354, in full_url
+    self._parse()
+  File "C:\Users\z3258367\Anaconda3\envs\ox\lib\urllib\request.py", line 383, in _parse
+    raise ValueError("unknown url type: %r" % self.full_url)
+ValueError: unknown url type: 'o-gcv-stagecoacheastscotland'
+
+2022-06-15 10:27:17,056 INFO urbanaccess GTFS feed download completed. Took 0.01 seconds
+2022-06-15 10:27:17,058 INFO urbanaccess data\gtfsfeed_text does not exist. Directory was created
+2022-06-15 10:51:07,191 INFO urbanaccess Removed all feeds from gtfs_feeds
+2022-06-15 10:51:14,021 INFO urbanaccess Added 1 feeds to gtfs_feeds: {'buses': 'https://data.bus-data.dft.gov.uk/timetable/download/gtfs-file/all/'}
+2022-06-15 11:33:52,758 INFO urbanaccess Removed all feeds from gtfs_feeds
+2022-06-15 11:33:54,194 INFO urbanaccess Added 1 feeds to gtfs_feeds: {'buses': 'https://data.bus-data.dft.gov.uk/timetable/download/gtfs-file/all/'}
+2022-06-15 11:33:55,625 INFO urbanaccess Added 1 feeds to gtfs_feeds: {'trains': 'https://s3.eu-west-2.amazonaws.com/feeds.planar.network/gb-rail-latest.zip'}
+2022-06-15 11:34:00,341 INFO urbanaccess 2 GTFS feed(s) will be downloaded here: data\gtfsfeed_zips
+2022-06-15 11:39:30,349 INFO urbanaccess Removed all feeds from gtfs_feeds
+2022-06-15 11:39:33,983 INFO urbanaccess Added 1 feeds to gtfs_feeds: {'buses': 'https://data.bus-data.dft.gov.uk/timetable/download/gtfs-file/all/'}
+2022-06-15 11:39:40,456 INFO urbanaccess 1 GTFS feed(s) will be downloaded here: data\gtfsfeed_zips
+2022-06-15 11:47:15,241 INFO urbanaccess buses GTFS feed downloaded successfully. Took 454.78 seconds for 569,246,463.0KB
+2022-06-15 11:47:15,242 INFO urbanaccess GTFS feed download completed. Took 454.79 seconds
+2022-06-15 11:48:02,207 INFO urbanaccess buses.zip successfully extracted to: data\gtfsfeed_text\buses
+2022-06-15 11:48:02,207 INFO urbanaccess GTFS feed zipfile extraction completed. Took 46.96 seconds for 1 files
+2022-06-15 13:37:51,564 INFO urbanaccess Checking GTFS text file header whitespace... Reading files using encoding: utf-8 set in configuration.
+2022-06-15 13:37:52,823 INFO urbanaccess GTFS text file header whitespace check completed. Took 1.26 seconds
+2022-06-15 13:37:52,836 INFO urbanaccess --------------------------------
+2022-06-15 13:37:52,837 INFO urbanaccess Processing GTFS feed: gb-rail-latest
+2022-06-15 13:38:00,402 INFO urbanaccess GTFS feed: gb-rail-latest, calendar_dates uses the same service_id across multiple agency_ids. This feed calendar_dates table will be modified from its original format to provide service_ids for each agency using a one to many join
+2022-06-15 13:38:01,696 INFO urbanaccess GTFS feed: gb-rail-latest, calendar uses the same service_id across multiple agency_ids. This feed calendar table will be modified from its original format to provide service_ids for each agency using a one to many join
+2022-06-15 13:38:19,272 INFO urbanaccess GTFS feed: gb-rail-latest, stops uses the same stop_id across multiple agency_ids. This feed stops table will be modified from its original format to provide stop_ids for each agency using a one to many join
+2022-06-15 13:38:35,364 INFO urbanaccess agency.txt agency_name column has more than one agency name listed. Unique agency id was assigned using the agency id and associated agency name.
+2022-06-15 13:38:35,581 INFO urbanaccess Unique agency id operation complete. Took 36.33 seconds
+2022-06-15 13:38:35,611 INFO urbanaccess Unique GTFS feed id operation complete. Took 0.03 seconds
+2022-06-15 13:38:35,616 WARNING urbanaccess WARNING: gb-rail-latest GTFS feed stops: 4,263 of 4,263 (100.00 percent of total) record(s) are outside the bounding box coordinates
+2022-06-15 13:38:35,616 INFO urbanaccess Records:
+2022-06-15 13:38:35,631 INFO urbanaccess      stop_id unique_agency_id stop_code                   stop_name  \
+0        4/1              nan    PEC=05                           F   
+1        AAP    grand_central   ALEXNDP            Alexandra Palace   
+2        AAP       thameslink   ALEXNDP            Alexandra Palace   
+3        AAP       east_coast   ALEXNDP            Alexandra Palace   
+4        AAP   great_northern   ALEXNDP            Alexandra Palace   
+...      ...              ...       ...                         ...   
+4258     ZSO              nan   CATZZSO                SOUTHWARK LT   
+4259     ZTG              nan   TWGWDLR            TOWER GATEWY DLR   
+4260     ZTL              nan   HRNSTPL           TURNPIKE LANE UND   
+4261     ZWT              nan   WATFLUL             WATFORD MET UND   
+4262     ZWY              nan   CATEZWY            WEMBLEY PARK UND   
+
+      stop_desc  stop_lat  stop_lon  zone_id  stop_url  location_type  \
+0           NaN   0.00000   0.00000      NaN       NaN            NaN   
+1           1.0  51.59792  -0.12024      NaN       NaN            NaN   
+2           1.0  51.59792  -0.12024      NaN       NaN            NaN   
+3           1.0  51.59792  -0.12024      NaN       NaN            NaN   
+4           1.0  51.59792  -0.12024      NaN       NaN            NaN   
+...         ...       ...       ...      ...       ...            ...   
+4258        0.0   0.00000   0.00000      NaN       NaN            NaN   
+4259        1.0   0.00000   0.00000      NaN       NaN            NaN   
+4260        1.0   0.00000   0.00000      NaN       NaN            NaN   
+4261        1.0   0.00000   0.00000      NaN       NaN            NaN   
+4262        1.0   0.00000   0.00000      NaN       NaN            NaN   
+
+      parent_station  stop_timezone  wheelchair_boarding    unique_feed_id  
+0                NaN  Europe/London                    0  gb-rail-latest_1  
+1                NaN  Europe/London                    0  gb-rail-latest_1  
+2                NaN  Europe/London                    0  gb-rail-latest_1  
+3                NaN  Europe/London                    0  gb-rail-latest_1  
+4                NaN  Europe/London                    0  gb-rail-latest_1  
+...              ...            ...                  ...               ...  
+4258             NaN  Europe/London                    0  gb-rail-latest_1  
+4259             NaN  Europe/London                    0  gb-rail-latest_1  
+4260             NaN  Europe/London                    0  gb-rail-latest_1  
+4261             NaN  Europe/London                    0  gb-rail-latest_1  
+4262             NaN  Europe/London                    0  gb-rail-latest_1  
+
+[4263 rows x 14 columns]
+2022-06-15 13:38:35,635 INFO urbanaccess Removed identified stops that are outside of bounding box.
+2022-06-15 13:38:36,397 INFO urbanaccess Appended route type to stops
+2022-06-15 13:38:36,723 INFO urbanaccess Appended route type to stop_times
+2022-06-15 13:38:37,440 INFO urbanaccess --------------------------------
+2022-06-15 13:38:37,578 INFO urbanaccess Added descriptive definitions to stops, routes, stop_times, and trips tables
+2022-06-15 13:38:37,593 INFO urbanaccess Successfully converted ['departure_time'] to seconds past midnight and appended new columns to stop_times. Took 0.01 seconds
+2022-06-15 13:38:37,594 INFO urbanaccess 1 GTFS feed file(s) successfully read as dataframes:
+2022-06-15 13:38:37,594 INFO urbanaccess      gb-rail-latest
+2022-06-15 13:38:37,594 INFO urbanaccess      Took 46.03 seconds
+2022-06-15 14:52:25,328 INFO urbanaccess Checking GTFS text file header whitespace... Reading files using encoding: utf-8 set in configuration.
+2022-06-15 14:52:49,786 INFO urbanaccess GTFS text file header whitespace check completed. Took 24.46 seconds
+2022-06-15 14:52:49,866 INFO urbanaccess --------------------------------
+2022-06-15 14:52:49,866 INFO urbanaccess Processing GTFS feed: gb-rail-latest
+2022-06-15 14:52:57,617 INFO urbanaccess GTFS feed: gb-rail-latest, calendar_dates uses the same service_id across multiple agency_ids. This feed calendar_dates table will be modified from its original format to provide service_ids for each agency using a one to many join
+2022-06-15 14:52:58,994 INFO urbanaccess GTFS feed: gb-rail-latest, calendar uses the same service_id across multiple agency_ids. This feed calendar table will be modified from its original format to provide service_ids for each agency using a one to many join
+2022-06-15 14:53:17,070 INFO urbanaccess GTFS feed: gb-rail-latest, stops uses the same stop_id across multiple agency_ids. This feed stops table will be modified from its original format to provide stop_ids for each agency using a one to many join
+2022-06-15 14:53:34,007 INFO urbanaccess agency.txt agency_name column has more than one agency name listed. Unique agency id was assigned using the agency id and associated agency name.
+2022-06-15 14:53:34,317 INFO urbanaccess Unique agency id operation complete. Took 37.73 seconds
+2022-06-15 14:53:34,346 INFO urbanaccess Unique GTFS feed id operation complete. Took 0.03 seconds
+2022-06-15 14:53:34,352 WARNING urbanaccess WARNING: gb-rail-latest GTFS feed stops: 4,263 of 4,263 (100.00 percent of total) record(s) are outside the bounding box coordinates
+2022-06-15 14:53:34,352 INFO urbanaccess Records:
+2022-06-15 14:53:34,369 INFO urbanaccess      stop_id unique_agency_id stop_code                   stop_name  \
+0        4/1              nan    PEC=05                           F   
+1        AAP    grand_central   ALEXNDP            Alexandra Palace   
+2        AAP       thameslink   ALEXNDP            Alexandra Palace   
+3        AAP       east_coast   ALEXNDP            Alexandra Palace   
+4        AAP   great_northern   ALEXNDP            Alexandra Palace   
+...      ...              ...       ...                         ...   
+4258     ZSO              nan   CATZZSO                SOUTHWARK LT   
+4259     ZTG              nan   TWGWDLR            TOWER GATEWY DLR   
+4260     ZTL              nan   HRNSTPL           TURNPIKE LANE UND   
+4261     ZWT              nan   WATFLUL             WATFORD MET UND   
+4262     ZWY              nan   CATEZWY            WEMBLEY PARK UND   
+
+      stop_desc  stop_lat  stop_lon  zone_id  stop_url  location_type  \
+0           NaN   0.00000   0.00000      NaN       NaN            NaN   
+1           1.0  51.59792  -0.12024      NaN       NaN            NaN   
+2           1.0  51.59792  -0.12024      NaN       NaN            NaN   
+3           1.0  51.59792  -0.12024      NaN       NaN            NaN   
+4           1.0  51.59792  -0.12024      NaN       NaN            NaN   
+...         ...       ...       ...      ...       ...            ...   
+4258        0.0   0.00000   0.00000      NaN       NaN            NaN   
+4259        1.0   0.00000   0.00000      NaN       NaN            NaN   
+4260        1.0   0.00000   0.00000      NaN       NaN            NaN   
+4261        1.0   0.00000   0.00000      NaN       NaN            NaN   
+4262        1.0   0.00000   0.00000      NaN       NaN            NaN   
+
+      parent_station  stop_timezone  wheelchair_boarding    unique_feed_id  
+0                NaN  Europe/London                    0  gb-rail-latest_1  
+1                NaN  Europe/London                    0  gb-rail-latest_1  
+2                NaN  Europe/London                    0  gb-rail-latest_1  
+3                NaN  Europe/London                    0  gb-rail-latest_1  
+4                NaN  Europe/London                    0  gb-rail-latest_1  
+...              ...            ...                  ...               ...  
+4258             NaN  Europe/London                    0  gb-rail-latest_1  
+4259             NaN  Europe/London                    0  gb-rail-latest_1  
+4260             NaN  Europe/London                    0  gb-rail-latest_1  
+4261             NaN  Europe/London                    0  gb-rail-latest_1  
+4262             NaN  Europe/London                    0  gb-rail-latest_1  
+
+[4263 rows x 14 columns]
+2022-06-15 14:53:34,369 INFO urbanaccess Removed identified stops that are outside of bounding box.
+2022-06-15 14:53:35,686 INFO urbanaccess Appended route type to stops
+2022-06-15 14:53:36,156 INFO urbanaccess Appended route type to stop_times
+2022-06-15 14:53:36,553 INFO urbanaccess --------------------------------
+2022-06-15 14:53:36,553 INFO urbanaccess --------------------------------
+2022-06-15 14:53:36,553 INFO urbanaccess Processing GTFS feed: itm_all_gtfs
+2022-06-15 14:56:20,000 INFO urbanaccess GTFS feed: itm_all_gtfs, calendar_dates uses the same service_id across multiple agency_ids. This feed calendar_dates table will be modified from its original format to provide service_ids for each agency using a one to many join
+2022-06-15 14:56:29,309 INFO urbanaccess GTFS feed: itm_all_gtfs, calendar uses the same service_id across multiple agency_ids. This feed calendar table will be modified from its original format to provide service_ids for each agency using a one to many join
+2022-06-15 15:00:54,724 INFO urbanaccess GTFS feed: itm_all_gtfs, stops uses the same stop_id across multiple agency_ids. This feed stops table will be modified from its original format to provide stop_ids for each agency using a one to many join
+2022-06-15 15:05:21,656 INFO urbanaccess agency.txt agency_name column has more than one agency name listed. Unique agency id was assigned using the agency id and associated agency name.
+2022-06-15 15:05:24,775 INFO urbanaccess Unique agency id operation complete. Took 584.31 seconds
+2022-06-15 15:05:25,247 INFO urbanaccess Unique GTFS feed id operation complete. Took 0.47 seconds
+2022-06-15 15:05:25,595 WARNING urbanaccess WARNING: itm_all_gtfs GTFS feed stops: 511,212 of 511,212 (100.00 percent of total) record(s) are outside the bounding box coordinates
+2022-06-15 15:05:25,595 INFO urbanaccess Records:
+2022-06-15 15:05:25,611 INFO urbanaccess              stop_id                  unique_agency_id stop_code  \
+0       0100BRP90310                        euro_taxis   bstgwpa   
+1       0100BRP90310  first_bristol,_bath_and_the_west   bstgwpa   
+2       0100BRP90310                         hct_group   bstgwpa   
+3       0100BRP90311  first_bristol,_bath_and_the_west   bstgwpm   
+4          010000056  first_bristol,_bath_and_the_west   bstpjgw   
+...              ...                               ...       ...   
+511207    940GZZWMWB                               nan       NaN   
+511208    940GZZWMWI                               nan       NaN   
+511209    940GZZWMWP                               nan       NaN   
+511210    940GZZWMWS                               nan       NaN   
+511211    940GZZWMWW                               nan       NaN   
+
+                              stop_name   stop_lat  stop_lon  \
+0                      Temple Meads Stn  51.449009 -2.585690   
+1                      Temple Meads Stn  51.449009 -2.585690   
+2                      Temple Meads Stn  51.449009 -2.585690   
+3                      Temple Meads Stn  51.450134 -2.585603   
+4                      Temple Meads Stn  51.449673 -2.584893   
+...                                 ...        ...       ...   
+511207            West Bromwich Central  52.516621 -1.994763   
+511208        Winson Green Outer Circle  52.498642 -1.938908   
+511209               Wednesbury Parkway  52.549503 -2.030596   
+511210        Wolverhampton St George's  52.584087 -2.124235   
+511211  Wednesbury Great Western Street  52.548550 -2.024328   
+
+        wheelchair_boarding  location_type parent_station platform_code  \
+0                         0            0.0       010G0002           NaN   
+1                         0            0.0       010G0002           NaN   
+2                         0            0.0       010G0002           NaN   
+3                         0            0.0       010G0002           NaN   
+4                         0            0.0       010G0002           NaN   
+...                     ...            ...            ...           ...   
+511207                    0            1.0            NaN           NaN   
+511208                    0            1.0            NaN           NaN   
+511209                    0            1.0            NaN           NaN   
+511210                    0            1.0            NaN           NaN   
+511211                    0            1.0            NaN           NaN   
+
+        unique_feed_id  
+0       itm_all_gtfs_2  
+1       itm_all_gtfs_2  
+2       itm_all_gtfs_2  
+3       itm_all_gtfs_2  
+4       itm_all_gtfs_2  
+...                ...  
+511207  itm_all_gtfs_2  
+511208  itm_all_gtfs_2  
+511209  itm_all_gtfs_2  
+511210  itm_all_gtfs_2  
+511211  itm_all_gtfs_2  
+
+[511212 rows x 11 columns]
+2022-06-15 15:05:25,652 INFO urbanaccess Removed identified stops that are outside of bounding box.
+2022-06-15 15:05:36,473 INFO urbanaccess Appended route type to stops
+2022-06-15 15:05:38,061 INFO urbanaccess Appended route type to stop_times
+2022-06-15 15:05:46,371 INFO urbanaccess --------------------------------
+2022-06-15 15:05:46,818 INFO urbanaccess Added descriptive definitions to stops, routes, stop_times, and trips tables
+2022-06-15 15:05:46,838 INFO urbanaccess Successfully converted ['departure_time'] to seconds past midnight and appended new columns to stop_times. Took 0.02 seconds
+2022-06-15 15:05:46,922 INFO urbanaccess 2 GTFS feed file(s) successfully read as dataframes:
+2022-06-15 15:05:46,922 INFO urbanaccess      gb-rail-latest
+2022-06-15 15:05:46,922 INFO urbanaccess      itm_all_gtfs
+2022-06-15 15:05:46,922 INFO urbanaccess      Took 801.60 seconds
+2022-06-15 15:24:56,991 INFO urbanaccess Checking GTFS text file header whitespace... Reading files using encoding: utf-8 set in configuration.
+2022-06-15 15:25:17,697 INFO urbanaccess GTFS text file header whitespace check completed. Took 20.71 seconds
+2022-06-15 15:25:17,770 INFO urbanaccess --------------------------------
+2022-06-15 15:25:17,770 INFO urbanaccess Processing GTFS feed: gb-rail-latest
+2022-06-15 15:25:25,227 INFO urbanaccess GTFS feed: gb-rail-latest, calendar_dates uses the same service_id across multiple agency_ids. This feed calendar_dates table will be modified from its original format to provide service_ids for each agency using a one to many join
+2022-06-15 15:25:26,604 INFO urbanaccess GTFS feed: gb-rail-latest, calendar uses the same service_id across multiple agency_ids. This feed calendar table will be modified from its original format to provide service_ids for each agency using a one to many join
+2022-06-15 15:25:44,086 INFO urbanaccess GTFS feed: gb-rail-latest, stops uses the same stop_id across multiple agency_ids. This feed stops table will be modified from its original format to provide stop_ids for each agency using a one to many join
+2022-06-15 15:26:01,022 INFO urbanaccess agency.txt agency_name column has more than one agency name listed. Unique agency id was assigned using the agency id and associated agency name.
+2022-06-15 15:26:01,275 INFO urbanaccess Unique agency id operation complete. Took 37.20 seconds
+2022-06-15 15:26:01,446 INFO urbanaccess Unique GTFS feed id operation complete. Took 0.04 seconds
+2022-06-15 15:26:01,454 WARNING urbanaccess WARNING: gb-rail-latest GTFS feed stops: 4,263 of 4,263 (100.00 percent of total) record(s) are outside the bounding box coordinates
+2022-06-15 15:26:01,454 INFO urbanaccess Records:
+2022-06-15 15:26:01,474 INFO urbanaccess      stop_id unique_agency_id stop_code                   stop_name  \
+0        4/1              nan    PEC=05                           F   
+1        AAP    grand_central   ALEXNDP            Alexandra Palace   
+2        AAP       thameslink   ALEXNDP            Alexandra Palace   
+3        AAP       east_coast   ALEXNDP            Alexandra Palace   
+4        AAP   great_northern   ALEXNDP            Alexandra Palace   
+...      ...              ...       ...                         ...   
+4258     ZSO              nan   CATZZSO                SOUTHWARK LT   
+4259     ZTG              nan   TWGWDLR            TOWER GATEWY DLR   
+4260     ZTL              nan   HRNSTPL           TURNPIKE LANE UND   
+4261     ZWT              nan   WATFLUL             WATFORD MET UND   
+4262     ZWY              nan   CATEZWY            WEMBLEY PARK UND   
+
+      stop_desc  stop_lat  stop_lon  zone_id  stop_url  location_type  \
+0           NaN   0.00000   0.00000      NaN       NaN            NaN   
+1           1.0  51.59792  -0.12024      NaN       NaN            NaN   
+2           1.0  51.59792  -0.12024      NaN       NaN            NaN   
+3           1.0  51.59792  -0.12024      NaN       NaN            NaN   
+4           1.0  51.59792  -0.12024      NaN       NaN            NaN   
+...         ...       ...       ...      ...       ...            ...   
+4258        0.0   0.00000   0.00000      NaN       NaN            NaN   
+4259        1.0   0.00000   0.00000      NaN       NaN            NaN   
+4260        1.0   0.00000   0.00000      NaN       NaN            NaN   
+4261        1.0   0.00000   0.00000      NaN       NaN            NaN   
+4262        1.0   0.00000   0.00000      NaN       NaN            NaN   
+
+      parent_station  stop_timezone  wheelchair_boarding    unique_feed_id  
+0                NaN  Europe/London                    0  gb-rail-latest_1  
+1                NaN  Europe/London                    0  gb-rail-latest_1  
+2                NaN  Europe/London                    0  gb-rail-latest_1  
+3                NaN  Europe/London                    0  gb-rail-latest_1  
+4                NaN  Europe/London                    0  gb-rail-latest_1  
+...              ...            ...                  ...               ...  
+4258             NaN  Europe/London                    0  gb-rail-latest_1  
+4259             NaN  Europe/London                    0  gb-rail-latest_1  
+4260             NaN  Europe/London                    0  gb-rail-latest_1  
+4261             NaN  Europe/London                    0  gb-rail-latest_1  
+4262             NaN  Europe/London                    0  gb-rail-latest_1  
+
+[4263 rows x 14 columns]
+2022-06-15 15:26:01,476 INFO urbanaccess Removed identified stops that are outside of bounding box.
+2022-06-15 15:26:02,524 INFO urbanaccess Appended route type to stops
+2022-06-15 15:26:02,857 INFO urbanaccess Appended route type to stop_times
+2022-06-15 15:26:03,126 INFO urbanaccess --------------------------------
+2022-06-15 15:26:03,126 INFO urbanaccess --------------------------------
+2022-06-15 15:26:03,126 INFO urbanaccess Processing GTFS feed: itm_all_gtfs
+2022-06-15 15:28:45,869 INFO urbanaccess GTFS feed: itm_all_gtfs, calendar_dates uses the same service_id across multiple agency_ids. This feed calendar_dates table will be modified from its original format to provide service_ids for each agency using a one to many join
+2022-06-15 15:28:55,018 INFO urbanaccess GTFS feed: itm_all_gtfs, calendar uses the same service_id across multiple agency_ids. This feed calendar table will be modified from its original format to provide service_ids for each agency using a one to many join
+2022-06-15 15:33:24,960 INFO urbanaccess GTFS feed: itm_all_gtfs, stops uses the same stop_id across multiple agency_ids. This feed stops table will be modified from its original format to provide stop_ids for each agency using a one to many join
+2022-06-15 15:37:53,016 INFO urbanaccess agency.txt agency_name column has more than one agency name listed. Unique agency id was assigned using the agency id and associated agency name.
+2022-06-15 15:37:56,322 INFO urbanaccess Unique agency id operation complete. Took 590.80 seconds
+2022-06-15 15:37:56,790 INFO urbanaccess Unique GTFS feed id operation complete. Took 0.47 seconds
+2022-06-15 15:37:57,063 WARNING urbanaccess WARNING: itm_all_gtfs GTFS feed stops: 511,212 of 511,212 (100.00 percent of total) record(s) are outside the bounding box coordinates
+2022-06-15 15:37:57,064 INFO urbanaccess Records:
+2022-06-15 15:37:57,078 INFO urbanaccess              stop_id                  unique_agency_id stop_code  \
+0       0100BRP90310                        euro_taxis   bstgwpa   
+1       0100BRP90310  first_bristol,_bath_and_the_west   bstgwpa   
+2       0100BRP90310                         hct_group   bstgwpa   
+3       0100BRP90311  first_bristol,_bath_and_the_west   bstgwpm   
+4          010000056  first_bristol,_bath_and_the_west   bstpjgw   
+...              ...                               ...       ...   
+511207    940GZZWMWB                               nan       NaN   
+511208    940GZZWMWI                               nan       NaN   
+511209    940GZZWMWP                               nan       NaN   
+511210    940GZZWMWS                               nan       NaN   
+511211    940GZZWMWW                               nan       NaN   
+
+                              stop_name   stop_lat  stop_lon  \
+0                      Temple Meads Stn  51.449009 -2.585690   
+1                      Temple Meads Stn  51.449009 -2.585690   
+2                      Temple Meads Stn  51.449009 -2.585690   
+3                      Temple Meads Stn  51.450134 -2.585603   
+4                      Temple Meads Stn  51.449673 -2.584893   
+...                                 ...        ...       ...   
+511207            West Bromwich Central  52.516621 -1.994763   
+511208        Winson Green Outer Circle  52.498642 -1.938908   
+511209               Wednesbury Parkway  52.549503 -2.030596   
+511210        Wolverhampton St George's  52.584087 -2.124235   
+511211  Wednesbury Great Western Street  52.548550 -2.024328   
+
+        wheelchair_boarding  location_type parent_station platform_code  \
+0                         0            0.0       010G0002           NaN   
+1                         0            0.0       010G0002           NaN   
+2                         0            0.0       010G0002           NaN   
+3                         0            0.0       010G0002           NaN   
+4                         0            0.0       010G0002           NaN   
+...                     ...            ...            ...           ...   
+511207                    0            1.0            NaN           NaN   
+511208                    0            1.0            NaN           NaN   
+511209                    0            1.0            NaN           NaN   
+511210                    0            1.0            NaN           NaN   
+511211                    0            1.0            NaN           NaN   
+
+        unique_feed_id  
+0       itm_all_gtfs_2  
+1       itm_all_gtfs_2  
+2       itm_all_gtfs_2  
+3       itm_all_gtfs_2  
+4       itm_all_gtfs_2  
+...                ...  
+511207  itm_all_gtfs_2  
+511208  itm_all_gtfs_2  
+511209  itm_all_gtfs_2  
+511210  itm_all_gtfs_2  
+511211  itm_all_gtfs_2  
+
+[511212 rows x 11 columns]
+2022-06-15 15:37:57,113 INFO urbanaccess Removed identified stops that are outside of bounding box.
+2022-06-15 15:38:09,202 INFO urbanaccess Appended route type to stops
+2022-06-15 15:38:10,775 INFO urbanaccess Appended route type to stop_times
+2022-06-15 15:38:19,216 INFO urbanaccess --------------------------------
+2022-06-15 15:38:19,671 INFO urbanaccess Added descriptive definitions to stops, routes, stop_times, and trips tables
+2022-06-15 15:38:19,672 INFO urbanaccess Successfully converted ['departure_time'] to seconds past midnight and appended new columns to stop_times. Took 0.00 seconds
+2022-06-15 15:38:20,259 INFO urbanaccess 2 GTFS feed file(s) successfully read as dataframes:
+2022-06-15 15:38:20,259 INFO urbanaccess      gb-rail-latest
+2022-06-15 15:38:20,259 INFO urbanaccess      itm_all_gtfs
+2022-06-15 15:38:20,259 INFO urbanaccess      Took 803.27 seconds
+2022-06-15 15:50:15,830 INFO urbanaccess Checking GTFS text file header whitespace... Reading files using encoding: utf-8 set in configuration.
+2022-06-15 15:50:43,464 INFO urbanaccess GTFS text file header whitespace check completed. Took 27.63 seconds
+2022-06-15 15:50:43,535 INFO urbanaccess --------------------------------
+2022-06-15 15:50:43,535 INFO urbanaccess Processing GTFS feed: gb-rail-latest
+2022-06-15 15:50:52,121 INFO urbanaccess GTFS feed: gb-rail-latest, calendar_dates uses the same service_id across multiple agency_ids. This feed calendar_dates table will be modified from its original format to provide service_ids for each agency using a one to many join
+2022-06-15 15:50:53,794 INFO urbanaccess GTFS feed: gb-rail-latest, calendar uses the same service_id across multiple agency_ids. This feed calendar table will be modified from its original format to provide service_ids for each agency using a one to many join
+2022-06-15 15:51:15,632 INFO urbanaccess GTFS feed: gb-rail-latest, stops uses the same stop_id across multiple agency_ids. This feed stops table will be modified from its original format to provide stop_ids for each agency using a one to many join
+2022-06-15 15:51:35,354 INFO urbanaccess agency.txt agency_name column has more than one agency name listed. Unique agency id was assigned using the agency id and associated agency name.
+2022-06-15 15:51:35,601 INFO urbanaccess Unique agency id operation complete. Took 44.69 seconds
+2022-06-15 15:51:35,647 INFO urbanaccess Unique GTFS feed id operation complete. Took 0.04 seconds
+2022-06-15 15:51:35,655 WARNING urbanaccess WARNING: gb-rail-latest GTFS feed stops: 4,263 of 4,263 (100.00 percent of total) record(s) are outside the bounding box coordinates
+2022-06-15 15:51:35,656 INFO urbanaccess Records:
+2022-06-15 15:51:35,674 INFO urbanaccess      stop_id unique_agency_id stop_code                   stop_name  \
+0        4/1              nan    PEC=05                           F   
+1        AAP    grand_central   ALEXNDP            Alexandra Palace   
+2        AAP       thameslink   ALEXNDP            Alexandra Palace   
+3        AAP       east_coast   ALEXNDP            Alexandra Palace   
+4        AAP   great_northern   ALEXNDP            Alexandra Palace   
+...      ...              ...       ...                         ...   
+4258     ZSO              nan   CATZZSO                SOUTHWARK LT   
+4259     ZTG              nan   TWGWDLR            TOWER GATEWY DLR   
+4260     ZTL              nan   HRNSTPL           TURNPIKE LANE UND   
+4261     ZWT              nan   WATFLUL             WATFORD MET UND   
+4262     ZWY              nan   CATEZWY            WEMBLEY PARK UND   
+
+      stop_desc  stop_lat  stop_lon  zone_id  stop_url  location_type  \
+0           NaN   0.00000   0.00000      NaN       NaN            NaN   
+1           1.0  51.59792  -0.12024      NaN       NaN            NaN   
+2           1.0  51.59792  -0.12024      NaN       NaN            NaN   
+3           1.0  51.59792  -0.12024      NaN       NaN            NaN   
+4           1.0  51.59792  -0.12024      NaN       NaN            NaN   
+...         ...       ...       ...      ...       ...            ...   
+4258        0.0   0.00000   0.00000      NaN       NaN            NaN   
+4259        1.0   0.00000   0.00000      NaN       NaN            NaN   
+4260        1.0   0.00000   0.00000      NaN       NaN            NaN   
+4261        1.0   0.00000   0.00000      NaN       NaN            NaN   
+4262        1.0   0.00000   0.00000      NaN       NaN            NaN   
+
+      parent_station  stop_timezone  wheelchair_boarding    unique_feed_id  
+0                NaN  Europe/London                    0  gb-rail-latest_1  
+1                NaN  Europe/London                    0  gb-rail-latest_1  
+2                NaN  Europe/London                    0  gb-rail-latest_1  
+3                NaN  Europe/London                    0  gb-rail-latest_1  
+4                NaN  Europe/London                    0  gb-rail-latest_1  
+...              ...            ...                  ...               ...  
+4258             NaN  Europe/London                    0  gb-rail-latest_1  
+4259             NaN  Europe/London                    0  gb-rail-latest_1  
+4260             NaN  Europe/London                    0  gb-rail-latest_1  
+4261             NaN  Europe/London                    0  gb-rail-latest_1  
+4262             NaN  Europe/London                    0  gb-rail-latest_1  
+
+[4263 rows x 14 columns]
+2022-06-15 15:51:35,677 INFO urbanaccess Removed identified stops that are outside of bounding box.
+2022-06-15 15:51:36,564 INFO urbanaccess Appended route type to stops
+2022-06-15 15:51:36,930 INFO urbanaccess Appended route type to stop_times
+2022-06-15 15:51:37,534 INFO urbanaccess --------------------------------
+2022-06-15 15:51:37,534 INFO urbanaccess --------------------------------
+2022-06-15 15:51:37,535 INFO urbanaccess Processing GTFS feed: itm_all_gtfs
+2022-06-15 15:54:20,776 INFO urbanaccess GTFS feed: itm_all_gtfs, calendar_dates uses the same service_id across multiple agency_ids. This feed calendar_dates table will be modified from its original format to provide service_ids for each agency using a one to many join
+2022-06-15 15:54:30,434 INFO urbanaccess GTFS feed: itm_all_gtfs, calendar uses the same service_id across multiple agency_ids. This feed calendar table will be modified from its original format to provide service_ids for each agency using a one to many join
+2022-06-15 15:58:12,494 INFO urbanaccess GTFS feed: itm_all_gtfs, stops uses the same stop_id across multiple agency_ids. This feed stops table will be modified from its original format to provide stop_ids for each agency using a one to many join
+2022-06-15 16:01:31,797 INFO urbanaccess agency.txt agency_name column has more than one agency name listed. Unique agency id was assigned using the agency id and associated agency name.
+2022-06-15 16:01:34,113 INFO urbanaccess Unique agency id operation complete. Took 470.96 seconds
+2022-06-15 16:01:34,511 INFO urbanaccess Unique GTFS feed id operation complete. Took 0.40 seconds
+2022-06-15 16:01:34,766 WARNING urbanaccess WARNING: itm_all_gtfs GTFS feed stops: 511,212 of 511,212 (100.00 percent of total) record(s) are outside the bounding box coordinates
+2022-06-15 16:01:34,769 INFO urbanaccess Records:
+2022-06-15 16:01:34,779 INFO urbanaccess              stop_id                  unique_agency_id stop_code  \
+0       0100BRP90310                        euro_taxis   bstgwpa   
+1       0100BRP90310  first_bristol,_bath_and_the_west   bstgwpa   
+2       0100BRP90310                         hct_group   bstgwpa   
+3       0100BRP90311  first_bristol,_bath_and_the_west   bstgwpm   
+4          010000056  first_bristol,_bath_and_the_west   bstpjgw   
+...              ...                               ...       ...   
+511207    940GZZWMWB                               nan       NaN   
+511208    940GZZWMWI                               nan       NaN   
+511209    940GZZWMWP                               nan       NaN   
+511210    940GZZWMWS                               nan       NaN   
+511211    940GZZWMWW                               nan       NaN   
+
+                              stop_name   stop_lat  stop_lon  \
+0                      Temple Meads Stn  51.449009 -2.585690   
+1                      Temple Meads Stn  51.449009 -2.585690   
+2                      Temple Meads Stn  51.449009 -2.585690   
+3                      Temple Meads Stn  51.450134 -2.585603   
+4                      Temple Meads Stn  51.449673 -2.584893   
+...                                 ...        ...       ...   
+511207            West Bromwich Central  52.516621 -1.994763   
+511208        Winson Green Outer Circle  52.498642 -1.938908   
+511209               Wednesbury Parkway  52.549503 -2.030596   
+511210        Wolverhampton St George's  52.584087 -2.124235   
+511211  Wednesbury Great Western Street  52.548550 -2.024328   
+
+        wheelchair_boarding  location_type parent_station platform_code  \
+0                         0            0.0       010G0002           NaN   
+1                         0            0.0       010G0002           NaN   
+2                         0            0.0       010G0002           NaN   
+3                         0            0.0       010G0002           NaN   
+4                         0            0.0       010G0002           NaN   
+...                     ...            ...            ...           ...   
+511207                    0            1.0            NaN           NaN   
+511208                    0            1.0            NaN           NaN   
+511209                    0            1.0            NaN           NaN   
+511210                    0            1.0            NaN           NaN   
+511211                    0            1.0            NaN           NaN   
+
+        unique_feed_id  
+0       itm_all_gtfs_2  
+1       itm_all_gtfs_2  
+2       itm_all_gtfs_2  
+3       itm_all_gtfs_2  
+4       itm_all_gtfs_2  
+...                ...  
+511207  itm_all_gtfs_2  
+511208  itm_all_gtfs_2  
+511209  itm_all_gtfs_2  
+511210  itm_all_gtfs_2  
+511211  itm_all_gtfs_2  
+
+[511212 rows x 11 columns]
+2022-06-15 16:01:34,806 INFO urbanaccess Removed identified stops that are outside of bounding box.
+2022-06-15 16:01:49,624 INFO urbanaccess Appended route type to stops
+2022-06-15 16:01:51,108 INFO urbanaccess Appended route type to stop_times
+2022-06-15 16:01:51,619 INFO urbanaccess --------------------------------
+2022-06-15 16:01:51,918 INFO urbanaccess Added descriptive definitions to stops, routes, stop_times, and trips tables
+2022-06-15 16:01:51,925 INFO urbanaccess Successfully converted ['departure_time'] to seconds past midnight and appended new columns to stop_times. Took 0.01 seconds
+2022-06-15 16:01:52,745 INFO urbanaccess 2 GTFS feed file(s) successfully read as dataframes:
+2022-06-15 16:01:52,746 INFO urbanaccess      gb-rail-latest
+2022-06-15 16:01:52,746 INFO urbanaccess      itm_all_gtfs
+2022-06-15 16:01:52,746 INFO urbanaccess      Took 696.92 seconds
+2022-06-15 16:03:09,222 INFO urbanaccess Checking GTFS text file header whitespace... Reading files using encoding: utf-8 set in configuration.
+2022-06-15 16:03:31,058 INFO urbanaccess GTFS text file header whitespace check completed. Took 21.84 seconds
+2022-06-15 16:03:31,130 INFO urbanaccess --------------------------------
+2022-06-15 16:03:31,130 INFO urbanaccess Processing GTFS feed: gb-rail-latest
+2022-06-15 16:03:37,093 INFO urbanaccess GTFS feed: gb-rail-latest, calendar_dates uses the same service_id across multiple agency_ids. This feed calendar_dates table will be modified from its original format to provide service_ids for each agency using a one to many join
+2022-06-15 16:03:38,215 INFO urbanaccess GTFS feed: gb-rail-latest, calendar uses the same service_id across multiple agency_ids. This feed calendar table will be modified from its original format to provide service_ids for each agency using a one to many join
+2022-06-15 16:03:52,345 INFO urbanaccess GTFS feed: gb-rail-latest, stops uses the same stop_id across multiple agency_ids. This feed stops table will be modified from its original format to provide stop_ids for each agency using a one to many join
+2022-06-15 16:04:06,049 INFO urbanaccess agency.txt agency_name column has more than one agency name listed. Unique agency id was assigned using the agency id and associated agency name.
+2022-06-15 16:04:06,323 INFO urbanaccess Unique agency id operation complete. Took 29.97 seconds
+2022-06-15 16:04:06,360 INFO urbanaccess Unique GTFS feed id operation complete. Took 0.04 seconds
+2022-06-15 16:04:06,360 WARNING urbanaccess WARNING: gb-rail-latest GTFS feed stops: 4,263 of 4,263 (100.00 percent of total) record(s) are outside the bounding box coordinates
+2022-06-15 16:04:06,360 INFO urbanaccess Records:
+2022-06-15 16:04:06,378 INFO urbanaccess      stop_id unique_agency_id stop_code                   stop_name  \
+0        4/1              nan    PEC=05                           F   
+1        AAP    grand_central   ALEXNDP            Alexandra Palace   
+2        AAP       thameslink   ALEXNDP            Alexandra Palace   
+3        AAP       east_coast   ALEXNDP            Alexandra Palace   
+4        AAP   great_northern   ALEXNDP            Alexandra Palace   
+...      ...              ...       ...                         ...   
+4258     ZSO              nan   CATZZSO                SOUTHWARK LT   
+4259     ZTG              nan   TWGWDLR            TOWER GATEWY DLR   
+4260     ZTL              nan   HRNSTPL           TURNPIKE LANE UND   
+4261     ZWT              nan   WATFLUL             WATFORD MET UND   
+4262     ZWY              nan   CATEZWY            WEMBLEY PARK UND   
+
+      stop_desc  stop_lat  stop_lon  zone_id  stop_url  location_type  \
+0           NaN   0.00000   0.00000      NaN       NaN            NaN   
+1           1.0  51.59792  -0.12024      NaN       NaN            NaN   
+2           1.0  51.59792  -0.12024      NaN       NaN            NaN   
+3           1.0  51.59792  -0.12024      NaN       NaN            NaN   
+4           1.0  51.59792  -0.12024      NaN       NaN            NaN   
+...         ...       ...       ...      ...       ...            ...   
+4258        0.0   0.00000   0.00000      NaN       NaN            NaN   
+4259        1.0   0.00000   0.00000      NaN       NaN            NaN   
+4260        1.0   0.00000   0.00000      NaN       NaN            NaN   
+4261        1.0   0.00000   0.00000      NaN       NaN            NaN   
+4262        1.0   0.00000   0.00000      NaN       NaN            NaN   
+
+      parent_station  stop_timezone  wheelchair_boarding    unique_feed_id  
+0                NaN  Europe/London                    0  gb-rail-latest_1  
+1                NaN  Europe/London                    0  gb-rail-latest_1  
+2                NaN  Europe/London                    0  gb-rail-latest_1  
+3                NaN  Europe/London                    0  gb-rail-latest_1  
+4                NaN  Europe/London                    0  gb-rail-latest_1  
+...              ...            ...                  ...               ...  
+4258             NaN  Europe/London                    0  gb-rail-latest_1  
+4259             NaN  Europe/London                    0  gb-rail-latest_1  
+4260             NaN  Europe/London                    0  gb-rail-latest_1  
+4261             NaN  Europe/London                    0  gb-rail-latest_1  
+4262             NaN  Europe/London                    0  gb-rail-latest_1  
+
+[4263 rows x 14 columns]
+2022-06-15 16:12:45,706 INFO urbanaccess Checking GTFS text file header whitespace... Reading files using encoding: utf-8 set in configuration.
+2022-06-15 16:13:12,594 INFO urbanaccess GTFS text file header whitespace check completed. Took 26.89 seconds
+2022-06-15 16:13:12,677 INFO urbanaccess --------------------------------
+2022-06-15 16:13:12,677 INFO urbanaccess Processing GTFS feed: gb-rail-latest
+2022-06-15 16:13:20,776 INFO urbanaccess GTFS feed: gb-rail-latest, calendar_dates uses the same service_id across multiple agency_ids. This feed calendar_dates table will be modified from its original format to provide service_ids for each agency using a one to many join
+2022-06-15 16:13:22,264 INFO urbanaccess GTFS feed: gb-rail-latest, calendar uses the same service_id across multiple agency_ids. This feed calendar table will be modified from its original format to provide service_ids for each agency using a one to many join
+2022-06-15 16:13:41,655 INFO urbanaccess GTFS feed: gb-rail-latest, stops uses the same stop_id across multiple agency_ids. This feed stops table will be modified from its original format to provide stop_ids for each agency using a one to many join
+2022-06-15 16:14:00,056 INFO urbanaccess agency.txt agency_name column has more than one agency name listed. Unique agency id was assigned using the agency id and associated agency name.
+2022-06-15 16:14:00,359 INFO urbanaccess Unique agency id operation complete. Took 40.70 seconds
+2022-06-15 16:14:00,385 INFO urbanaccess Unique GTFS feed id operation complete. Took 0.03 seconds
+2022-06-15 16:14:03,100 INFO urbanaccess Appended route type to stops
+2022-06-15 16:14:04,641 INFO urbanaccess Appended route type to stop_times
+2022-06-15 16:14:05,623 INFO urbanaccess --------------------------------
+2022-06-15 16:14:05,624 INFO urbanaccess --------------------------------
+2022-06-15 16:14:05,624 INFO urbanaccess Processing GTFS feed: itm_all_gtfs
+2022-06-15 16:16:06,536 INFO urbanaccess GTFS feed: itm_all_gtfs, calendar_dates uses the same service_id across multiple agency_ids. This feed calendar_dates table will be modified from its original format to provide service_ids for each agency using a one to many join
+2022-06-15 16:16:13,101 INFO urbanaccess GTFS feed: itm_all_gtfs, calendar uses the same service_id across multiple agency_ids. This feed calendar table will be modified from its original format to provide service_ids for each agency using a one to many join
+2022-06-15 16:19:11,208 INFO urbanaccess GTFS feed: itm_all_gtfs, stops uses the same stop_id across multiple agency_ids. This feed stops table will be modified from its original format to provide stop_ids for each agency using a one to many join
+2022-06-15 16:22:44,137 INFO urbanaccess agency.txt agency_name column has more than one agency name listed. Unique agency id was assigned using the agency id and associated agency name.
+2022-06-15 16:22:47,578 INFO urbanaccess Unique agency id operation complete. Took 428.00 seconds
+2022-06-15 16:22:47,965 INFO urbanaccess Unique GTFS feed id operation complete. Took 0.39 seconds
+2022-06-15 16:23:52,933 INFO urbanaccess Appended route type to stops
+2022-06-15 16:24:16,909 INFO urbanaccess Appended route type to stop_times
+2022-06-15 16:24:38,961 INFO urbanaccess --------------------------------
+2022-06-15 16:24:56,870 INFO urbanaccess Added descriptive definitions to stops, routes, stop_times, and trips tables
+2022-06-15 16:30:11,589 INFO urbanaccess Successfully converted ['departure_time'] to seconds past midnight and appended new columns to stop_times. Took 314.72 seconds
+2022-06-15 16:30:14,291 INFO urbanaccess 2 GTFS feed file(s) successfully read as dataframes:
+2022-06-15 16:30:14,291 INFO urbanaccess      gb-rail-latest
+2022-06-15 16:30:14,291 INFO urbanaccess      itm_all_gtfs
+2022-06-15 16:30:14,292 INFO urbanaccess      Took 1,048.59 seconds
+2022-06-15 16:43:13,143 INFO urbanaccess Checking GTFS text file header whitespace... Reading files using encoding: utf-8 set in configuration.
+2022-06-15 16:43:34,477 INFO urbanaccess GTFS text file header whitespace check completed. Took 21.33 seconds
+2022-06-15 16:43:34,547 INFO urbanaccess --------------------------------
+2022-06-15 16:43:34,547 INFO urbanaccess Processing GTFS feed: gb-rail-latest
+2022-06-15 16:43:42,915 INFO urbanaccess GTFS feed: gb-rail-latest, calendar_dates uses the same service_id across multiple agency_ids. This feed calendar_dates table will be modified from its original format to provide service_ids for each agency using a one to many join
+2022-06-15 16:43:44,496 INFO urbanaccess GTFS feed: gb-rail-latest, calendar uses the same service_id across multiple agency_ids. This feed calendar table will be modified from its original format to provide service_ids for each agency using a one to many join
+2022-06-15 16:44:03,875 INFO urbanaccess GTFS feed: gb-rail-latest, stops uses the same stop_id across multiple agency_ids. This feed stops table will be modified from its original format to provide stop_ids for each agency using a one to many join
+2022-06-15 16:44:22,098 INFO urbanaccess agency.txt agency_name column has more than one agency name listed. Unique agency id was assigned using the agency id and associated agency name.
+2022-06-15 16:44:22,413 INFO urbanaccess Unique agency id operation complete. Took 41.32 seconds
+2022-06-15 16:44:22,453 INFO urbanaccess Unique GTFS feed id operation complete. Took 0.04 seconds
+2022-06-15 16:44:22,465 WARNING urbanaccess WARNING: gb-rail-latest GTFS feed stops: 4,229 of 4,262 (99.23 percent of total) record(s) are outside the bounding box coordinates
+2022-06-15 16:44:22,465 INFO urbanaccess Records:
+2022-06-15 16:44:22,481 INFO urbanaccess      stop_id   unique_agency_id stop_code          stop_name  stop_desc  \
+0        AAP      grand_central   ALEXNDP   Alexandra Palace          1   
+1        AAP         thameslink   ALEXNDP   Alexandra Palace          1   
+2        AAP         east_coast   ALEXNDP   Alexandra Palace          1   
+3        AAP     great_northern   ALEXNDP   Alexandra Palace          1   
+4        AAP  first_hull_trains   ALEXNDP   Alexandra Palace          1   
+...      ...                ...       ...                ...        ...   
+4257     ZSO                nan   CATZZSO       SOUTHWARK LT          0   
+4258     ZTG                nan   TWGWDLR   TOWER GATEWY DLR          1   
+4259     ZTL                nan   HRNSTPL  TURNPIKE LANE UND          1   
+4260     ZWT                nan   WATFLUL    WATFORD MET UND          1   
+4261     ZWY                nan   CATEZWY   WEMBLEY PARK UND          1   
+
+      stop_lat  stop_lon  zone_id  stop_url  location_type  parent_station  \
+0     51.59792  -0.12024      NaN       NaN            NaN             NaN   
+1     51.59792  -0.12024      NaN       NaN            NaN             NaN   
+2     51.59792  -0.12024      NaN       NaN            NaN             NaN   
+3     51.59792  -0.12024      NaN       NaN            NaN             NaN   
+4     51.59792  -0.12024      NaN       NaN            NaN             NaN   
+...        ...       ...      ...       ...            ...             ...   
+4257   0.00000   0.00000      NaN       NaN            NaN             NaN   
+4258   0.00000   0.00000      NaN       NaN            NaN             NaN   
+4259   0.00000   0.00000      NaN       NaN            NaN             NaN   
+4260   0.00000   0.00000      NaN       NaN            NaN             NaN   
+4261   0.00000   0.00000      NaN       NaN            NaN             NaN   
+
+      stop_timezone  wheelchair_boarding    unique_feed_id  
+0     Europe/London                    0  gb-rail-latest_1  
+1     Europe/London                    0  gb-rail-latest_1  
+2     Europe/London                    0  gb-rail-latest_1  
+3     Europe/London                    0  gb-rail-latest_1  
+4     Europe/London                    0  gb-rail-latest_1  
+...             ...                  ...               ...  
+4257  Europe/London                    0  gb-rail-latest_1  
+4258  Europe/London                    0  gb-rail-latest_1  
+4259  Europe/London                    0  gb-rail-latest_1  
+4260  Europe/London                    0  gb-rail-latest_1  
+4261  Europe/London                    0  gb-rail-latest_1  
+
+[4229 rows x 14 columns]
+2022-06-15 16:44:22,486 INFO urbanaccess Removed identified stops that are outside of bounding box.
+2022-06-15 16:44:22,486 INFO urbanaccess gb-rail-latest GTFS feed stops: coordinates are in northwest hemisphere. Latitude = North (90); Longitude = West (-90).
+2022-06-15 16:44:23,840 INFO urbanaccess Appended route type to stops
+2022-06-15 16:44:24,198 INFO urbanaccess Appended route type to stop_times
+2022-06-15 16:44:24,464 INFO urbanaccess --------------------------------
+2022-06-15 16:44:24,464 INFO urbanaccess --------------------------------
+2022-06-15 16:44:24,466 INFO urbanaccess Processing GTFS feed: itm_all_gtfs
+2022-06-15 16:47:14,327 INFO urbanaccess GTFS feed: itm_all_gtfs, calendar_dates uses the same service_id across multiple agency_ids. This feed calendar_dates table will be modified from its original format to provide service_ids for each agency using a one to many join
+2022-06-15 16:47:23,459 INFO urbanaccess GTFS feed: itm_all_gtfs, calendar uses the same service_id across multiple agency_ids. This feed calendar table will be modified from its original format to provide service_ids for each agency using a one to many join
+2022-06-15 16:49:55,100 INFO urbanaccess GTFS feed: itm_all_gtfs, stops uses the same stop_id across multiple agency_ids. This feed stops table will be modified from its original format to provide stop_ids for each agency using a one to many join
+2022-06-15 16:52:38,140 INFO urbanaccess agency.txt agency_name column has more than one agency name listed. Unique agency id was assigned using the agency id and associated agency name.
+2022-06-15 16:52:39,567 INFO urbanaccess Unique agency id operation complete. Took 365.59 seconds
+2022-06-15 16:52:39,773 INFO urbanaccess Unique GTFS feed id operation complete. Took 0.21 seconds
+2022-06-15 16:52:39,935 WARNING urbanaccess WARNING: itm_all_gtfs GTFS feed stops: 507,694 of 511,212 (99.31 percent of total) record(s) are outside the bounding box coordinates
+2022-06-15 16:52:39,935 INFO urbanaccess Records:
+2022-06-15 16:52:39,935 INFO urbanaccess              stop_id                  unique_agency_id stop_code  \
+0       0100BRP90310                        euro_taxis   bstgwpa   
+1       0100BRP90310  first_bristol,_bath_and_the_west   bstgwpa   
+2       0100BRP90310                         hct_group   bstgwpa   
+3       0100BRP90311  first_bristol,_bath_and_the_west   bstgwpm   
+4          010000056  first_bristol,_bath_and_the_west   bstpjgw   
+...              ...                               ...       ...   
+511207    940GZZWMWB                               nan       NaN   
+511208    940GZZWMWI                               nan       NaN   
+511209    940GZZWMWP                               nan       NaN   
+511210    940GZZWMWS                               nan       NaN   
+511211    940GZZWMWW                               nan       NaN   
+
+                              stop_name   stop_lat  stop_lon  \
+0                      Temple Meads Stn  51.449009 -2.585690   
+1                      Temple Meads Stn  51.449009 -2.585690   
+2                      Temple Meads Stn  51.449009 -2.585690   
+3                      Temple Meads Stn  51.450134 -2.585603   
+4                      Temple Meads Stn  51.449673 -2.584893   
+...                                 ...        ...       ...   
+511207            West Bromwich Central  52.516621 -1.994763   
+511208        Winson Green Outer Circle  52.498642 -1.938908   
+511209               Wednesbury Parkway  52.549503 -2.030596   
+511210        Wolverhampton St George's  52.584087 -2.124235   
+511211  Wednesbury Great Western Street  52.548550 -2.024328   
+
+        wheelchair_boarding  location_type parent_station platform_code  \
+0                         0            0.0       010G0002           NaN   
+1                         0            0.0       010G0002           NaN   
+2                         0            0.0       010G0002           NaN   
+3                         0            0.0       010G0002           NaN   
+4                         0            0.0       010G0002           NaN   
+...                     ...            ...            ...           ...   
+511207                    0            1.0            NaN           NaN   
+511208                    0            1.0            NaN           NaN   
+511209                    0            1.0            NaN           NaN   
+511210                    0            1.0            NaN           NaN   
+511211                    0            1.0            NaN           NaN   
+
+        unique_feed_id  
+0       itm_all_gtfs_2  
+1       itm_all_gtfs_2  
+2       itm_all_gtfs_2  
+3       itm_all_gtfs_2  
+4       itm_all_gtfs_2  
+...                ...  
+511207  itm_all_gtfs_2  
+511208  itm_all_gtfs_2  
+511209  itm_all_gtfs_2  
+511210  itm_all_gtfs_2  
+511211  itm_all_gtfs_2  
+
+[507694 rows x 11 columns]
+2022-06-15 16:52:39,973 INFO urbanaccess Removed identified stops that are outside of bounding box.
+2022-06-15 16:52:39,989 INFO urbanaccess itm_all_gtfs GTFS feed stops: coordinates are in northwest hemisphere. Latitude = North (90); Longitude = West (-90).
+2022-06-15 16:52:48,225 INFO urbanaccess Appended route type to stops
+2022-06-15 16:52:49,359 INFO urbanaccess Appended route type to stop_times
+2022-06-15 16:52:54,037 INFO urbanaccess --------------------------------
+2022-06-15 16:52:54,504 INFO urbanaccess Added descriptive definitions to stops, routes, stop_times, and trips tables
+2022-06-15 16:52:57,245 INFO urbanaccess Successfully converted ['departure_time'] to seconds past midnight and appended new columns to stop_times. Took 2.74 seconds
+2022-06-15 16:53:01,170 INFO urbanaccess 2 GTFS feed file(s) successfully read as dataframes:
+2022-06-15 16:53:01,170 INFO urbanaccess      gb-rail-latest
+2022-06-15 16:53:01,170 INFO urbanaccess      itm_all_gtfs
+2022-06-15 16:53:01,170 INFO urbanaccess      Took 588.03 seconds
+2022-06-15 17:17:13,780 INFO urbanaccess Using calendar to extract service_ids to select trips.
+2022-06-15 17:17:13,796 INFO urbanaccess 10,091 service_ids were extracted from calendar
+2022-06-15 17:17:14,165 INFO urbanaccess 509,509 trip(s) 46.71 percent of 1,090,770 total trip records were found in calendar for GTFS feed(s): ['gb-rail-latest', 'itm all gtfs']
+2022-06-15 17:17:14,181 WARNING urbanaccess NOTE: If you expected more trips to have been extracted and your GTFS feed(s) have a calendar_dates file, consider utilizing the calendar_dates_lookup parameter in order to add additional trips based on information inside of calendar_dates. This should only be done if you know the corresponding GTFS feed is using calendar_dates instead of calendar to specify service_ids. When in doubt do not use the calendar_dates_lookup parameter.
+2022-06-15 17:17:15,420 INFO urbanaccess 509,509 of 1,090,770 total trips were extracted representing calendar day: monday. Took 2.01 seconds
+2022-06-15 17:17:16,768 INFO urbanaccess There are no departure time records missing from trips following the specified schedule. There are no records to interpolate.
+2022-06-15 17:17:18,554 INFO urbanaccess Difference between stop times has been successfully calculated. Took 1.62 seconds
+2022-06-15 17:17:18,625 INFO urbanaccess Stop times from 07:00:00 to 10:00:00 successfully selected 58,452 records out of 324,190 total records (18.03 percent of total). Took 0.07 seconds
+2022-06-15 17:17:18,643 INFO urbanaccess Starting transformation process for 2,030 total trips...
+2022-06-15 17:17:20,598 INFO urbanaccess stop time table transformation to Pandana format edge table completed. Took 1.97 seconds
+2022-06-15 17:17:20,609 INFO urbanaccess Time conversion completed: seconds converted to minutes.
+2022-06-15 17:17:20,617 INFO urbanaccess 3,246 of 3,551 records selected from stops. Took 0.01 seconds
+2022-06-15 17:17:20,620 INFO urbanaccess stop time table transformation to Pandana format node table completed. Took 0.00 seconds
+2022-06-15 17:17:21,788 INFO urbanaccess route type successfully joined to transit edges. Took 1.17 seconds
+2022-06-15 17:17:23,065 INFO urbanaccess route id successfully joined to transit edges. Took 1.28 seconds
+2022-06-15 17:17:23,071 INFO urbanaccess Successfully created transit network. Took 9.93 seconds
+2022-06-15 17:20:37,446 INFO urbanaccess checking for low connectivity nodes...
+2022-06-15 17:22:20,035 INFO urbanaccess 147 out of 63,541 nodes (0.23 percent of total) were identified as having low connectivity and have been removed.
+2022-06-15 17:22:20,107 INFO urbanaccess Completed OSM data download and graph node and edge table creation in 151.08 seconds
+2022-06-15 17:22:20,403 INFO urbanaccess Created OSM network with travel time impedance using a travel speed of 3 MPH. Took 0.01 seconds
+2022-06-15 17:22:21,177 INFO urbanaccess Loaded UrbanAccess network components comprised of:
+2022-06-15 17:22:21,177 INFO urbanaccess      Transit: 3,246 nodes and 56,422 edges;
+2022-06-15 17:22:21,178 INFO urbanaccess      OSM: 63,394 nodes and 169,382 edges
+2022-06-15 17:22:23,034 INFO urbanaccess Connector edges between the OSM and transit network nodes successfully completed. Took 1.86 seconds
+2022-06-15 17:22:25,704 INFO urbanaccess Edge and node tables formatted for Pandana with integer node ids: id_int, to_int, and from_int. Took 2.38 seconds
+2022-06-15 17:22:25,762 INFO urbanaccess Network edge and node network integration completed successfully resulting in a total of 66,640 nodes and 232,296 edges:
+2022-06-15 17:22:25,762 INFO urbanaccess      Transit: 3,246 nodes 56,422 edges;
+2022-06-15 17:22:25,762 INFO urbanaccess      OSM: 63,394 nodes 169,382 edges; and
+2022-06-15 17:22:25,762 INFO urbanaccess      OSM/Transit connector: 6,492 edges.
+2022-06-15 17:26:33,062 INFO urbanaccess New Edinburgh_integrated_net.h5 hdf5 store created in dir: data
+2022-06-15 17:26:36,894 INFO urbanaccess edges saved in data/Edinburgh_integrated_net.h5 hdf5 store.
+2022-06-15 17:26:36,895 INFO urbanaccess Using existing data/Edinburgh_integrated_net.h5 hdf5 store.
+2022-06-15 17:26:37,188 INFO urbanaccess nodes saved in data/Edinburgh_integrated_net.h5 hdf5 store.
+2022-06-15 17:27:20,263 INFO urbanaccess Stop times from 07:00:00 to 10:00:00 successfully selected 58,452 records out of 324,190 total records (18.03 percent of total). Took 0.02 seconds
+2022-06-15 17:27:21,448 INFO urbanaccess Starting route stop headway calculation for 6,968 route stops...
+2022-06-15 17:27:30,891 INFO urbanaccess Route stop headway calculation complete. Took 9.66 seconds
+2022-06-15 17:27:31,150 INFO urbanaccess headway calculation complete. Took 12.05 seconds
+2022-06-15 17:30:37,583 INFO urbanaccess Loaded UrbanAccess network components comprised of:
+2022-06-15 17:30:37,583 INFO urbanaccess      Transit: 3,246 nodes and 56,422 edges;
+2022-06-15 17:30:37,583 INFO urbanaccess      OSM: 63,394 nodes and 169,382 edges
+2022-06-15 17:30:37,688 INFO urbanaccess routes successfully joined to transit nodes. Took 0.07 seconds
+2022-06-15 17:30:39,866 INFO urbanaccess Connector edges between the OSM and transit network nodes successfully completed. Took 2.17 seconds
+2022-06-15 17:30:39,866 INFO urbanaccess mean route stop headway will be used for pedestrian to transit edge impedance.
+2022-06-15 17:30:39,905 INFO urbanaccess Headway impedance calculation completed. Took 0.04 seconds
+2022-06-15 17:30:41,867 INFO urbanaccess Edge and node tables formatted for Pandana with integer node ids: id_int, to_int, and from_int. Took 1.77 seconds
+2022-06-15 17:30:41,909 INFO urbanaccess Network edge and node network integration completed successfully resulting in a total of 70,344 nodes and 291,023 edges:
+2022-06-15 17:30:41,909 INFO urbanaccess      Transit: 6,950 nodes 56,422 edges;
+2022-06-15 17:30:41,909 INFO urbanaccess      OSM: 63,394 nodes 169,382 edges; and
+2022-06-15 17:30:41,910 INFO urbanaccess      OSM/Transit connector: 65,219 edges.
+2022-06-15 17:30:47,093 INFO urbanaccess Using existing data/Edinburgh_integrated_net.h5 hdf5 store.
+2022-06-15 17:30:51,473 INFO urbanaccess Existing edges overwritten in data/Edinburgh_integrated_net.h5 hdf5 store.
+2022-06-15 17:30:51,474 INFO urbanaccess Using existing data/Edinburgh_integrated_net.h5 hdf5 store.
+2022-06-15 17:30:51,587 INFO urbanaccess Existing nodes overwritten in data/Edinburgh_integrated_net.h5 hdf5 store.
+2022-06-15 19:28:03,321 INFO urbanaccess Checking GTFS text file header whitespace... Reading files using encoding: utf-8 set in configuration.
+2022-06-15 19:28:04,389 INFO urbanaccess GTFS text file header whitespace check completed. Took 1.08 seconds
+2022-06-15 19:28:04,392 INFO urbanaccess --------------------------------
+2022-06-15 19:28:04,392 INFO urbanaccess Processing GTFS feed: GTFS
+2022-06-15 19:28:05,823 INFO urbanaccess The unique agency id: transport_canberra was generated using the name of the agency in the agency.txt file.
+2022-06-15 19:28:05,878 INFO urbanaccess Unique agency id operation complete. Took 0.06 seconds
+2022-06-15 19:28:05,897 INFO urbanaccess Unique GTFS feed id operation complete. Took 0.02 seconds
+2022-06-15 19:28:05,903 INFO urbanaccess No GTFS feed stops were found to be outside the bounding box coordinates
+2022-06-15 19:28:05,903 INFO urbanaccess GTFS GTFS feed stops: coordinates are in southeast hemisphere. Latitude = South (-90); Longitude = East (90).
+2022-06-15 19:28:07,105 INFO urbanaccess Appended route type to stops
+2022-06-15 19:28:07,449 INFO urbanaccess Appended route type to stop_times
+2022-06-15 19:28:07,816 INFO urbanaccess --------------------------------
+2022-06-15 19:28:08,168 INFO urbanaccess Added descriptive definitions to stops, routes, stop_times, and trips tables
+2022-06-15 19:28:12,291 INFO urbanaccess Successfully converted ['departure_time'] to seconds past midnight and appended new columns to stop_times. Took 4.12 seconds
+2022-06-15 19:28:12,299 INFO urbanaccess 1 GTFS feed file(s) successfully read as dataframes:
+2022-06-15 19:28:12,299 INFO urbanaccess      GTFS
+2022-06-15 19:28:12,299 INFO urbanaccess      Took 8.99 seconds
+2022-06-15 19:56:58,846 INFO urbanaccess Using calendar to extract service_ids to select trips.
+2022-06-15 19:56:58,863 INFO urbanaccess 3 service_ids were extracted from calendar
+2022-06-15 19:56:58,882 INFO urbanaccess 12,818 trip(s) 68.77 percent of 18,640 total trip records were found in calendar for GTFS feed(s): ['gtfs']
+2022-06-15 19:56:58,882 WARNING urbanaccess NOTE: If you expected more trips to have been extracted and your GTFS feed(s) have a calendar_dates file, consider utilizing the calendar_dates_lookup parameter in order to add additional trips based on information inside of calendar_dates. This should only be done if you know the corresponding GTFS feed is using calendar_dates instead of calendar to specify service_ids. When in doubt do not use the calendar_dates_lookup parameter.
+2022-06-15 19:56:58,926 INFO urbanaccess 12,818 of 18,640 total trips were extracted representing calendar day: monday. Took 0.09 seconds
+2022-06-15 19:57:00,814 INFO urbanaccess There are no departure time records missing from trips following the specified schedule. There are no records to interpolate.
+2022-06-15 19:57:05,594 INFO urbanaccess Difference between stop times has been successfully calculated. Took 4.25 seconds
+2022-06-15 19:57:05,768 INFO urbanaccess Stop times from 07:00:00 to 10:00:00 successfully selected 83,877 records out of 430,092 total records (19.50 percent of total). Took 0.17 seconds
+2022-06-15 19:57:05,813 INFO urbanaccess Starting transformation process for 2,997 total trips...
+2022-06-15 19:57:14,216 INFO urbanaccess stop time table transformation to Pandana format edge table completed. Took 8.44 seconds
+2022-06-15 19:57:14,254 INFO urbanaccess Time conversion completed: seconds converted to minutes.
+2022-06-15 19:57:14,278 INFO urbanaccess 2,433 of 2,444 records selected from stops. Took 0.02 seconds
+2022-06-15 19:57:14,288 INFO urbanaccess stop time table transformation to Pandana format node table completed. Took 0.01 seconds
+2022-06-15 19:57:17,191 INFO urbanaccess route type successfully joined to transit edges. Took 2.90 seconds
+2022-06-15 19:57:17,286 INFO urbanaccess route id successfully joined to transit edges. Took 0.10 seconds
+2022-06-15 19:57:17,288 INFO urbanaccess Successfully created transit network. Took 18.47 seconds
+2022-06-15 20:04:00,708 INFO urbanaccess checking for low connectivity nodes...
+2022-06-15 20:09:51,239 INFO urbanaccess 184 out of 123,783 nodes (0.15 percent of total) were identified as having low connectivity and have been removed.
+2022-06-15 20:09:51,520 INFO urbanaccess Completed OSM data download and graph node and edge table creation in 635.04 seconds
+2022-06-15 20:09:52,082 INFO urbanaccess Created OSM network with travel time impedance using a travel speed of 3 MPH. Took 0.02 seconds
+2022-06-15 20:12:09,637 INFO urbanaccess Stop times from 07:00:00 to 10:00:00 successfully selected 83,877 records out of 430,092 total records (19.50 percent of total). Took 0.06 seconds
+2022-06-15 20:12:10,031 INFO urbanaccess Starting route stop headway calculation for 7,271 route stops...
+2022-06-15 20:12:41,575 INFO urbanaccess Route stop headway calculation complete. Took 31.75 seconds
+2022-06-15 20:12:42,513 INFO urbanaccess headway calculation complete. Took 32.98 seconds
+2022-06-15 20:12:42,954 INFO urbanaccess Loaded UrbanAccess network components comprised of:
+2022-06-15 20:12:42,954 INFO urbanaccess      Transit: 2,433 nodes and 80,880 edges;
+2022-06-15 20:12:42,956 INFO urbanaccess      OSM: 123,599 nodes and 372,716 edges
+2022-06-15 20:12:43,413 INFO urbanaccess routes successfully joined to transit nodes. Took 0.30 seconds
+2022-06-15 20:12:51,104 INFO urbanaccess Connector edges between the OSM and transit network nodes successfully completed. Took 7.68 seconds
+2022-06-15 20:12:51,104 INFO urbanaccess mean route stop headway will be used for pedestrian to transit edge impedance.
+2022-06-15 20:12:51,230 INFO urbanaccess Headway impedance calculation completed. Took 0.13 seconds
+2022-06-15 20:13:02,239 INFO urbanaccess Edge and node tables formatted for Pandana with integer node ids: id_int, to_int, and from_int. Took 9.75 seconds
+2022-06-15 20:13:02,411 INFO urbanaccess Network edge and node network integration completed successfully resulting in a total of 130,870 nodes and 544,744 edges:
+2022-06-15 20:13:02,411 INFO urbanaccess      Transit: 7,271 nodes 80,880 edges;
+2022-06-15 20:13:02,411 INFO urbanaccess      OSM: 123,599 nodes 372,716 edges; and
+2022-06-15 20:13:02,411 INFO urbanaccess      OSM/Transit connector: 91,148 edges.
+2022-06-15 20:13:02,902 INFO urbanaccess New Canberra_integrated_net.h5 hdf5 store created in dir: data
+2022-06-15 20:13:23,778 INFO urbanaccess edges saved in data/Canberra_integrated_net.h5 hdf5 store.
+2022-06-15 20:13:23,780 INFO urbanaccess Using existing data/Canberra_integrated_net.h5 hdf5 store.
+2022-06-15 20:13:24,353 INFO urbanaccess nodes saved in data/Canberra_integrated_net.h5 hdf5 store.
+2022-06-15 22:15:42,117 INFO urbanaccess Figure created. Took 94.59 seconds
+2022-06-15 22:18:02,291 INFO urbanaccess Figure created. Took 93.01 seconds
+2022-06-15 22:23:21,463 INFO urbanaccess Figure created. Took 95.28 seconds
+2022-06-15 22:34:09,519 INFO urbanaccess Figure created. Took 14.52 seconds
+2022-06-15 22:34:44,064 INFO urbanaccess Figure created. Took 14.38 seconds
+2022-06-15 22:37:12,916 INFO urbanaccess Figure created. Took 78.36 seconds

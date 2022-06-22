@@ -1,0 +1,2 @@
+2022-06-17 09:45:44,784 INFO urbanaccess Successfully read store: data/Edinburgh_integrated_net.h5 with the following keys: ['/edges', '/nodes']
+2022-06-17 09:45:57,958 INFO urbanaccess Successfully read store: data/Edinburgh_integrated_net.h5 with the following keys: ['/edges', '/nodes']
