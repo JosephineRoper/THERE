@@ -260,10 +260,11 @@ def connect_poi(pois, nodes, edges, key_col=None, path=None, threshold=200, knn=
     edges_meter, _ = update_edges(edges_meter, new_lines, replace=False)
 
     ## STAGE 3: output
-    # convert CRS
+    # convert CRS. make sure every edge has a length first
+    edges_meter['length'] = edges_meter.length
     nodes = nodes_meter.to_crs(orig_crs).drop('new',axis=1)
     edges = edges_meter.to_crs(orig_crs)
-
+   
     # preprocess for pandana
     nodes.index = nodes['connect_id']  # IMPORTANT
     nodes['x'] = [p.x for p in nodes['geometry']]
