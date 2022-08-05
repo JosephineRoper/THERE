@@ -122,7 +122,8 @@ def there_index(distance_network, pois, poi_dictionary, poi_weights, poi_gammas,
         else:
             relevant_pois = gpd.GeoDataFrame()
             for key in poi_dictionary[category]:
-                relevant_pois = pd.concat([relevant_pois, pois.loc[(pois[key].isin(poi_dictionary[category][key]))]])
+                if key in pois:
+                    relevant_pois = pd.concat([relevant_pois, pois.loc[(pois[key].isin(poi_dictionary[category][key]))]])
             
             if len(relevant_pois) == 0:
                 print("No pois in category: "+ category)
