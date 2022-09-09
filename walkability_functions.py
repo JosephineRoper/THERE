@@ -34,6 +34,11 @@ def poi_downloader(place, poi_dictionary, proj_crs):
     else:
         print("'place' should be a string for querying OSM, or a geodataframe containing a polygon of the place boundaries.")
         return
+
+    # OSM POIs include domestic swimming pools in some areas. This line removes swimming pools less than 100m2.
+    # Same for domestic tennis courts appearing as 'pitches'. Remove pitches below 450m2.
+    gdf = gdf[~((gdf['leisure']=='swimming_pool') & (gdf.area < 100))]
+    gdf = gdf[~((gdf['leisure']=='pitch') & (gdf.area < 450))]
         
     gdf['orig_geometry'] = gdf.geometry
     # convert all to centroids
@@ -136,15 +141,16 @@ def there_index(distance_network, pois, poi_dictionary, poi_weights, poi_gammas,
                 
                 access = distance_network.nearest_pois(
                     distance=distance, category=category, num_pois=num_pois)
-              
-                for i in range(return_no):
-                    col_name = ''.join((str(category),str(i+1)))
-                    results[col_name] = access[i+1]
 
                 discounted = access.applymap(access_weight,distance=distance,beta=dist_const).sum(axis=1)
 
-                results[cat_name] = weight*(1-np.exp(-dim_const*discounted))        
-
+                results[cat_name] = weight*(1-np.exp(-dim_const*discounted))
+                
+                # this provides columns with the distance of the return_no closest destinations in the category
+                for i in range(return_no):
+                    col_name = ''.join((str(category),str(i+1)))
+                    results[col_name] = access[i+1]
+                    
             else:
                 # makes eg. a job count column the index column, so that 'include_poi_ids' returns job counts
                 relevant_pois = relevant_pois.set_index(poi_variables[category])
@@ -160,12 +166,12 @@ def there_index(distance_network, pois, poi_dictionary, poi_weights, poi_gammas,
                                     access.iloc[:,num_pois:2*num_pois].values
                                     ).sum(axis=1)
 
+                results[cat_name] = weight*(1-np.exp(-dim_const*results[poi_variables[category]]))
+
                 for i in range(return_no):
                     col_name = ''.join((str(category),str(i+1)))
                     results[col_name] = access[i+1]
-
-                results[cat_name] = weight*(1-np.exp(-dim_const*results[poi_variables[category]]))
-
+                    
             print("Finished category: " + category)
             print("Maximum score: " + str(max(results[cat_name])) + " out of " + str(weight))
             
