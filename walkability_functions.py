@@ -16,10 +16,25 @@ from shapely.geometry import MultiPoint
 
 #%% functions
 
-def poi_downloader(place, poi_dictionary, proj_crs):
+def nearest_to_centroids(polygons, points, **kwargs):
+    orig_geometry = polygons.geometry
+    # convert polygons to centroids
+    polygons.geometry = polygons.centroid
+    polygons = polygons.sjoin_nearest(points, **kwargs)
+    # convert back to polygons
+    polygons.geometry = orig_geometry
+    return polygons
+    
+def poi_downloader(place, poi_dictionary, proj_crs, timeout=None):
     # Download WalkTHERE points of interest from OSM using OSMnx
     # place should either be a string suitable for finding a place by name from the Nominatim API
     # or a geodataframe containing a single polygon of the place's boundaries
+
+    # changing timeout here changes setting for any subsequent use of OSMNx
+    # this seems unavoidable
+    if isinstance(timeout, int):
+        ox.settings.timeout = timeout
+    
     tags = {}
     for category, values in poi_dictionary.items():
         tags = {x: values.get(x,[]) + tags.get(x,[]) for x in set(values).union(tags)}
@@ -31,6 +46,7 @@ def poi_downloader(place, poi_dictionary, proj_crs):
         bbox = place.bounds
         bbox_pois = ox.geometries.geometries_from_bbox(bbox['maxy'][0], bbox['miny'][0], bbox['maxx'][0], bbox['minx'][0], tags)
         gdf = gpd.clip(bbox_pois, place, keep_geom_type=False).to_crs(proj_crs)
+        #? does this work with multiple polygons
     else:
         print("'place' should be a string for querying OSM, or a geodataframe containing a polygon of the place boundaries.")
         return
