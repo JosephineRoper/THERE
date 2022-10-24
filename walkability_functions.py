@@ -46,7 +46,7 @@ def poi_downloader(place, poi_dictionary, proj_crs, timeout=None):
         bbox = place.bounds
         bbox_pois = ox.geometries.geometries_from_bbox(bbox['maxy'][0], bbox['miny'][0], bbox['maxx'][0], bbox['minx'][0], tags)
         gdf = gpd.clip(bbox_pois, place, keep_geom_type=False).to_crs(proj_crs)
-        #? does this work with multiple polygons
+        #this doesn't work with multiple polygons, it dissolves them
     else:
         print("'place' should be a string for querying OSM, or a geodataframe containing a polygon of the place boundaries.")
         return
@@ -118,6 +118,9 @@ def access_weight(x, distance, beta=0.001):
     else:
         return math.exp(-beta*x)
 
+def dim_opp_weight(x, dim_const, num_pois):
+    return [(1-np.exp(-dim_const*x)) - (1-np.exp(-dim_const*(x-1))) for x in range(num_pois)]
+                   
 def there_index(distance_network, pois, poi_dictionary, poi_weights, poi_gammas, poi_nums, poi_lambdas, poi_variables, distance, return_no=5):
     # return_no = 5 is the default setting, to return individual distance results
     # for maximum 5 closest points in each category. Enables some debugging &
@@ -136,6 +139,8 @@ def there_index(distance_network, pois, poi_dictionary, poi_weights, poi_gammas,
         num_pois = poi_nums[category]
         weight = poi_weights[category]
         cat_name = ''.join((str(category),"_",str(weight)))
+
+        dim_opp_weight = [(1-np.exp(-dim_const*x)) - (1-np.exp(-dim_const*(x-1))) for x in range(1,num_pois+1)]
 
         if category not in poi_dictionary:
             print("Category", category, "is not in the POI dictionary")
@@ -158,9 +163,9 @@ def there_index(distance_network, pois, poi_dictionary, poi_weights, poi_gammas,
                 access = distance_network.nearest_pois(
                     distance=distance, category=category, num_pois=num_pois)
 
-                discounted = access.applymap(access_weight,distance=distance,beta=dist_const).sum(axis=1)
+                discounted = (access.applymap(access_weight,distance=distance,beta=dist_const)*dim_opp_weight).sum(axis=1)
 
-                results[cat_name] = weight*(1-np.exp(-dim_const*discounted))
+                results[cat_name] = weight*discounted
                 
                 # this provides columns with the distance of the return_no closest destinations in the category
                 for i in range(return_no):
@@ -178,11 +183,16 @@ def there_index(distance_network, pois, poi_dictionary, poi_weights, poi_gammas,
                 access = distance_network.nearest_pois(
                     distance=distance, category=category, num_pois=num_pois, include_poi_ids=True)
 
-                results[poi_variables[category]] = ((access.iloc[:,0:num_pois].applymap(access_weight, distance=distance,beta=dist_const))*
-                                    access.iloc[:,num_pois:2*num_pois].values
-                                    ).sum(axis=1)
+                impedance = (access.iloc[:,0:num_pois].applymap(access_weight, distance=distance,beta=dist_const))
+                attractiveness = np.nan_to_num(access.iloc[:,num_pois:2*num_pois].values, nan=0.0)
+                attractiveness_sum = attractiveness.cumsum(axis=1).astype(np.int64)
 
-                results[cat_name] = weight*(1-np.exp(-dim_const*results[poi_variables[category]]))
+                max_opps = np.max(attractiveness_sum)
+                dim = [(1-np.exp(-dim_const*(x+1))) - (1-np.exp(-dim_const*x)) for x in range(max_opps+1)]
+
+                results[poi_variables[category]] = (np.array(dim)[attractiveness_sum]*attractiveness*impedance).sum(axis=1)
+                
+                results[cat_name] = weight*results[poi_variables[category]]
 
                 for i in range(return_no):
                     col_name = ''.join((str(category),str(i+1)))
