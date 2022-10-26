@@ -112,12 +112,6 @@ def remove_duplicate_pois(datasets, buffer=10):
     
     return pois[pois.index.isin(joined_pois.index)]
 
-def access_weight(x, distance, beta=0.001):
-    if x == distance:
-        return 0
-    else:
-        return math.exp(-beta*x)
-
 def dim_opp_weight(x, dim_const, num_pois):
     return [(1-np.exp(-dim_const*x)) - (1-np.exp(-dim_const*(x-1))) for x in range(num_pois)]
                    
@@ -163,9 +157,10 @@ def there_index(distance_network, pois, poi_dictionary, poi_weights, poi_gammas,
                 access = distance_network.nearest_pois(
                     distance=distance, category=category, num_pois=num_pois)
 
-                discounted = (access.applymap(access_weight,distance=distance,beta=dist_const)*dim_opp_weight).sum(axis=1)
+                impedance = np.exp(-0.001*access.iloc[:,0:num_pois])
+                impedance[access.iloc[:,0:num_pois] == 2400] = 0
 
-                results[cat_name] = weight*discounted
+                results[cat_name] = weight*(impedance*dim_opp_weight).sum(axis=1)
                 
                 # this provides columns with the distance of the return_no closest destinations in the category
                 for i in range(return_no):
@@ -183,14 +178,16 @@ def there_index(distance_network, pois, poi_dictionary, poi_weights, poi_gammas,
                 access = distance_network.nearest_pois(
                     distance=distance, category=category, num_pois=num_pois, include_poi_ids=True)
 
-                impedance = (access.iloc[:,0:num_pois].applymap(access_weight, distance=distance,beta=dist_const))
+                impedance = np.exp(-0.001*access.iloc[:,0:num_pois])
+                impedance[access.iloc[:,0:num_pois] == 2400] = 0
+                
                 attractiveness = np.nan_to_num(access.iloc[:,num_pois:2*num_pois].values, nan=0.0)
                 attractiveness_sum = attractiveness.cumsum(axis=1).astype(np.int64)
 
                 max_opps = np.max(attractiveness_sum)
-                dim = [(1-np.exp(-dim_const*(x+1))) - (1-np.exp(-dim_const*x)) for x in range(max_opps+1)]
+                dim = np.array([(1-np.exp(-dim_const*(x+1))) - (1-np.exp(-dim_const*x)) for x in range(max_opps+1)])
 
-                results[poi_variables[category]] = (np.array(dim)[attractiveness_sum]*attractiveness*impedance).sum(axis=1)
+                results[poi_variables[category]] = (dim[attractiveness_sum]*attractiveness*impedance).sum(axis=1)
                 
                 results[cat_name] = weight*results[poi_variables[category]]
 
@@ -207,3 +204,6 @@ def there_index(distance_network, pois, poi_dictionary, poi_weights, poi_gammas,
     results['THERE_Index'] = 100/total_weight*(results[col_list].sum(axis=1))
     
     return results
+
+
+
