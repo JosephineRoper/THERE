@@ -157,8 +157,8 @@ def there_index(distance_network, pois, poi_dictionary, poi_weights, poi_gammas,
                 access = distance_network.nearest_pois(
                     distance=distance, category=category, num_pois=num_pois)
 
-                impedance = np.exp(-0.001*access.iloc[:,0:num_pois])
-                impedance[access.iloc[:,0:num_pois] == 2400] = 0
+                impedance = np.exp(-dist_const*access.iloc[:,0:num_pois])
+                impedance[access.iloc[:,0:num_pois] == distance] = 0
 
                 results[cat_name] = weight*(impedance*dim_opp_weight).sum(axis=1)
                 
@@ -178,8 +178,8 @@ def there_index(distance_network, pois, poi_dictionary, poi_weights, poi_gammas,
                 access = distance_network.nearest_pois(
                     distance=distance, category=category, num_pois=num_pois, include_poi_ids=True)
 
-                impedance = np.exp(-0.001*access.iloc[:,0:num_pois])
-                impedance[access.iloc[:,0:num_pois] == 2400] = 0
+                impedance = np.exp(-dist_const*access.iloc[:,0:num_pois])
+                impedance[access.iloc[:,0:num_pois] == distance] = 0
                 
                 attractiveness = np.nan_to_num(access.iloc[:,num_pois:2*num_pois].values, nan=0.0)
                 attractiveness_sum = attractiveness.cumsum(axis=1).astype(np.int64)
@@ -187,6 +187,7 @@ def there_index(distance_network, pois, poi_dictionary, poi_weights, poi_gammas,
                 max_opps = np.max(attractiveness_sum)
                 dim = np.array([(1-np.exp(-dim_const*(x+1))) - (1-np.exp(-dim_const*x)) for x in range(max_opps+1)])
 
+                # this is no longer useful/meaningful as an output column. could output attract_sum instead
                 results[poi_variables[category]] = (dim[attractiveness_sum]*attractiveness*impedance).sum(axis=1)
                 
                 results[cat_name] = weight*results[poi_variables[category]]
