@@ -1,7 +1,7 @@
 # THERE (Travel from Home to Everywhere Required Everyday)
 
 THERE is a collection of scripts and functions using the Python open-source geospatial ecosystem to calculate accessibility across multiple modes, for any area in the world. The model is based on my PhD research, the following paper (currently preprint) explains the theoretical basis for its design. To be cited if using this code:
-Roper, J., Ng, M., & Pettit, C. (2022). WalkTHERE: Travel from Home to Everywhere Required Everyday - An open-source walkability index based on multi-activity accessibility. Unpublished. https://doi.org/10.13140/RG.2.2.34461.59365
+Roper, J., Ng, M., & Pettit, C. (2022). WalkTHERE: Travel from Home to Everywhere Required Everyday - An open-source walkability index based on multi-activity accessibility. Unpublished (under review). https://doi.org/10.13140/RG.2.2.34461.59365
 
 The principle of the model is to include all categories of destinations that are regular sources of travel, weighted according to trip frequency in travel surveys, preferably surveys specific to the area in question. The model therefore includes employment as a major travel destination. Employment data at a scale appropriate to the mode under analysis (but preferably as fine as possible, eg. jobs per block) is needed.
 
