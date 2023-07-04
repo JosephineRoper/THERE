@@ -43,6 +43,7 @@ def poi_downloader(place, poi_dictionary, proj_crs, timeout=None):
         gdf = ox.geometries_from_place(place, tags).to_crs(proj_crs)
     elif type(place) == gpd.GeoDataFrame:
         place = place.to_crs("EPSG:4326")
+        # I'm not sure why I'm doing this instead of using geometries_from_polygon
         bbox = place.bounds
         bbox_pois = ox.geometries.geometries_from_bbox(bbox['maxy'][0], bbox['miny'][0], bbox['maxx'][0], bbox['minx'][0], tags)
         gdf = gpd.clip(bbox_pois, place, keep_geom_type=False).to_crs(proj_crs)
@@ -112,10 +113,126 @@ def remove_duplicate_pois(datasets, buffer=10):
     
     return pois[pois.index.isin(joined_pois.index)]
 
-def dim_opp_weight(x, dim_const, num_pois):
-    return [(1-np.exp(-dim_const*x)) - (1-np.exp(-dim_const*(x-1))) for x in range(num_pois)]
+def cluster_index(distance_network, pois, poi_dictionary, poi_weights, poi_gammas, poi_nums, poi_lambdas, poi_variables, distance, return_no=5, chain_frac=1/3, loop=2):
+    # Run the index once to give POIs an initial accessibility
+    # if going to recurse further, need to not reset the index each time, it causes an error
+    # think it's fixed by setting the index back to original again
+    # why am I even doing this? to attribute THERE to the pois correctly
+    print(chain_frac)
+    # this will run a number of times equal to loop, updating the POI THERE Index each time
+    # so far, I haven't tested what difference multiple rounds makes.
+    for i in range(loop):
+        poi_results = there_index(distance_network, pois, poi_dictionary, poi_weights, poi_gammas, poi_nums, poi_lambdas, poi_variables, distance, return_no, chain_frac)
+        pois['node_id'] = distance_network.get_node_ids(pois['geometry'].x, pois['geometry'].y)
+        pois = pois.reset_index().set_index('node_id').copy()
+        pois['THERE'] = poi_results['THERE_Index']
+        pois = pois.reset_index().set_index('index').copy()
+        print(pois['THERE'])
+
+    # having this out of the loop means can skip the final assignment of pois['THERE'], but it seems cleaner to have it all inside
+    #results = there_index(distance_network, pois, poi_dictionary, poi_weights, poi_gammas, poi_nums, poi_lambdas, #poi_variables, distance, return_no, chain_frac)
+    return poi_results
                    
-def there_index(distance_network, pois, poi_dictionary, poi_weights, poi_gammas, poi_nums, poi_lambdas, poi_variables, distance, return_no=5):
+def there_index(distance_network, pois, poi_dictionary, poi_weights, poi_gammas, poi_nums, poi_lambdas, poi_variables, distance, return_no=5, chain_frac=1/3):
+    # return_no = 5 is the default setting, to return individual distance results
+    # for maximum 5 closest points in each category. Enables some debugging &
+    # visualisation options, but not returning an overly large results matrix
+    # (as poi_nums searched may be 100s per category)
+    
+    results = distance_network.nodes_df.copy()
+
+    total_weight = sum(poi_weights)
+    
+    for category in poi_weights.index:
+        results = results.copy()  # to remove fragmentation warning
+        
+        dim_const = poi_lambdas[category]
+        dist_const = poi_gammas[category]
+        num_pois = poi_nums[category]
+        weight = poi_weights[category]
+        cat_name = ''.join((str(category),"_",str(weight)))
+
+        if category not in poi_dictionary:
+            print("Category", category, "is not in the POI dictionary")
+
+        else:
+            relevant_pois = gpd.GeoDataFrame()
+            for key in poi_dictionary[category]:
+                if key in pois:
+                    relevant_pois = pd.concat([relevant_pois, pois.loc[(pois[key].isin(poi_dictionary[category][key]))]])
+                    # some duplicates arise with this method of constructing relevant_pois,
+                    # because the same POI may be tagged "shopping:supermarket" and "building:supermarket"
+                    # in an OSM dataset for example. We are relying on the poi index to be an unique identifier.
+                    relevant_pois = relevant_pois[~relevant_pois.index.duplicated()]
+
+            if len(relevant_pois) == 0:
+                print("No pois in category: "+ category)
+                results[str(cat_name)] = 0
+
+            else:
+                if poi_variables[category] == 'count':
+                        relevant_pois['attract'] = [1 for i in range(len(relevant_pois))]
+                else: 
+                    # makes eg. a job count column the index column, so that 'include_poi_ids' returns job counts
+                    relevant_pois['attract'] = relevant_pois[poi_variables[category]]
+                        
+                # check if relevant_pois has a 'THERE' column
+                if 'THERE' in relevant_pois.columns:
+                #try: # if 'THERE' exists, 
+                    relevant_pois['chain_weight'] = (1-chain_frac) + chain_frac*relevant_pois['THERE']/100
+                #except:
+                else:
+                    relevant_pois['chain_weight'] = 1
+              
+                x, y = (relevant_pois['geometry'].x, relevant_pois['geometry'].y)
+                distance_network.set_pois(category, distance, num_pois, x, y)
+                
+                access = distance_network.nearest_pois(
+                    distance=distance, category=category, num_pois=num_pois, include_poi_ids=True)
+
+                impedance = np.exp(-dist_const*access.iloc[:,0:num_pois])
+                impedance[access.iloc[:,0:num_pois] == distance] = 0
+
+                attract_dict = pd.Series(relevant_pois.attract.values,index=relevant_pois.index).to_dict()
+                there_dict = pd.Series(relevant_pois.chain_weight.values,index=relevant_pois.index).to_dict()
+
+                attract = access.iloc[:,num_pois:2*num_pois].copy().applymap(lambda y: attract_dict.get(y,y))
+                there_weight = access.iloc[:,num_pois:2*num_pois].copy().applymap(lambda y: there_dict.get(y,y))
+
+                # nan to 0 is necessary because where eg. for some origin point, only 4 POIs of a certain category
+                # are found (within distance), the returned poi_ids will be NaN for the remaining num_pois columns
+                attractiveness = np.nan_to_num(attract.values, nan=0.0)
+                there = np.nan_to_num(there_weight.values, nan=0.0)
+                attractiveness_sum = attractiveness.cumsum(axis=1).astype(np.int64)
+
+                #max_opps = np.max(attractiveness_sum)
+                #dim = np.array([(1-np.exp(-dim_const*(x+1))) - (1-np.exp(-dim_const*x)) for x in range(max_opps+1)])
+                dim = np.array([(1-np.exp(-dim_const*(x+1))) - (1-np.exp(-dim_const*x)) for x in attractiveness_sum])
+
+                # this is no longer useful/meaningful as an output column. could output attract_sum instead
+                results[poi_variables[category]] = (dim*attractiveness*impedance*there).sum(axis=1)
+                
+                results[cat_name] = weight*results[poi_variables[category]]
+
+                #results[cat_name] = weight*(impedance*dim_opp_weight).sum(axis=1)
+                
+                # this provides columns with the distance of the return_no closest destinations in the category
+                for i in range(return_no):
+                    col_name = ''.join((str(category),str(i+1)))
+                    results[col_name] = access[i+1]
+                    
+            print("Finished category: " + category)
+            print("Maximum score: " + str(max(results[cat_name])) + " out of " + str(weight))
+            
+    col_list = [''.join((str(category),"_",str(poi_weights[category])))
+                for category in poi_dictionary]   
+    
+    results['THERE_Index'] = 100/total_weight*(results[col_list].sum(axis=1))
+    
+    return results
+
+def there_index_transit(distance_network, walk_node_ids,
+                        pois, poi_dictionary, poi_weights, poi_gammas, poi_nums, poi_lambdas, poi_variables, distance, return_no=5):
     # return_no = 5 is the default setting, to return individual distance results
     # for maximum 5 closest points in each category. Enables some debugging &
     # visualisation options, but not returning an overly large results matrix
@@ -172,7 +289,6 @@ def there_index(distance_network, pois, poi_dictionary, poi_weights, poi_gammas,
                 relevant_pois = relevant_pois.set_index(poi_variables[category])
                 
                 x, y = (relevant_pois['geometry'].x, relevant_pois['geometry'].y)
-
                 distance_network.set_pois(category, distance, num_pois, x, y)
 
                 access = distance_network.nearest_pois(
@@ -205,6 +321,4 @@ def there_index(distance_network, pois, poi_dictionary, poi_weights, poi_gammas,
     results['THERE_Index'] = 100/total_weight*(results[col_list].sum(axis=1))
     
     return results
-
-
 
