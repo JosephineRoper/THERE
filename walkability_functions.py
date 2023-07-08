@@ -93,6 +93,7 @@ def poly_vertices(data_gdf):
 def remove_duplicate_pois(datasets, buffer=10):
     # input is a list of maybe one or several geodataframes
     # buffer default is 10m = assumes projected CRS
+    # datasets must have a 'category' column defining which duplicates will be removed - only pois that have the same category and are within the buffer distance of each other will be removed
     
     pois = pd.concat(datasets).reset_index(drop=True)
     pois_buffer = pois.copy()
@@ -109,7 +110,8 @@ def remove_duplicate_pois(datasets, buffer=10):
     
     print("Removed " 
           + "{0:.2f}".format((1-len(joined_pois)/len(pois))*100) 
-          + "% duplicate points from dataframes")  
+          + "% duplicate points from dataframes - "
+          + str((len(pois)-len(joined_pois))) + " points")
     
     return pois[pois.index.isin(joined_pois.index)]
 

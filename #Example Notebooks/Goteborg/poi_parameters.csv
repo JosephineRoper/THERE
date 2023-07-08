@@ -1,6 +1,7 @@
 ﻿category,weight,distance_constant,diminishing_returns_constant,variable,num_pois
-employment,31.9,0.001,0.00001653,Jobs,100
-education,14.3,0.001,0.3,count,25
-shopping,21.6,0.001,0.3,count,25
-errands,8.9,0.001,0.3,count,25
-recreation,23.3,0.001,0.3,count,25
+employment,0,0.001,0.00001653,Jobs,100
+education,0,0.001,0.3,count,25
+shopping,0,0.001,0.3,count,25
+errands,0,0.001,0.3,count,25
+recreation,0,0.001,0.3,count,25
+grocery,100,0.001,0.3,count,25
