@@ -1,0 +1,10 @@
+agency_id,agency_name,agency_url,agency_timezone,agency_lang,agency_phone,agency_fare_url
+2,Rail Commissioner,https://www.adelaidemetro.com.au/,Australia/Adelaide,EN,1300 311 108,https://www.adelaidemetro.com.au/tickets-and-fares/adelaide-metro-fares
+3,Torrens Connect,https://www.adelaidemetro.com.au/,Australia/Adelaide,EN,1300 311 108,https://www.adelaidemetro.com.au/tickets-and-fares/adelaide-metro-fares
+4,SouthLink,https://www.adelaidemetro.com.au/,Australia/Adelaide,EN,1300 311 108,https://www.adelaidemetro.com.au/tickets-and-fares/adelaide-metro-fares
+41,School Service - SouthLink,https://www.adelaidemetro.com.au/,Australia/Adelaide,EN,1300 311 108,https://www.adelaidemetro.com.au/tickets-and-fares/adelaide-metro-fares
+5,Torrens Transit,https://www.adelaidemetro.com.au/,Australia/Adelaide,EN,1300 311 108,https://www.adelaidemetro.com.au/tickets-and-fares/adelaide-metro-fares
+51,School Service - Torrens Transit,https://www.adelaidemetro.com.au/,Australia/Adelaide,EN,1300 311 108,https://www.adelaidemetro.com.au/tickets-and-fares/adelaide-metro-fares
+52,Industrial Service - Torrens Transit,https://www.adelaidemetro.com.au/,Australia/Adelaide,EN,1300 311 108,https://www.adelaidemetro.com.au/tickets-and-fares/adelaide-metro-fares
+8,Busways,https://www.adelaidemetro.com.au/,Australia/Adelaide,EN,1300 311 108,https://www.adelaidemetro.com.au/tickets-and-fares/adelaide-metro-fares
+81,School Service - Busways,https://www.adelaidemetro.com.au/,Australia/Adelaide,EN,1300 311 108,https://www.adelaidemetro.com.au/tickets-and-fares/adelaide-metro-fares

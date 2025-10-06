@@ -1,0 +1,61 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "there-access"
+dynamic = ["version"]
+description = 'Multimodal access framework using OpenStreetMap data'
+readme = "README.md"
+requires-python = ">=3.8"
+license = "GPL-3.0-only"
+keywords = []
+authors = [
+  { name = "Josephine Roper", email = "roper.josephine@gmail.com" },
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+]
+dependencies = []
+
+[project.urls]
+Documentation = "https://github.com/JosephineRoper/there#readme"
+Issues = "https://github.com/JosephineRoper/there/issues"
+Source = "https://github.com/JosephineRoper/there"
+
+[tool.hatch.version]
+path = "src/there/__about__.py"
+
+[tool.hatch.envs.types]
+extra-dependencies = [
+  "mypy>=1.0.0",
+]
+[tool.hatch.envs.types.scripts]
+check = "mypy --install-types --non-interactive {args:src/there tests}"
+
+[tool.coverage.run]
+source_pkgs = ["there", "tests"]
+branch = true
+parallel = true
+omit = [
+  "src/there/__about__.py",
+]
+
+[tool.coverage.paths]
+there = ["src/there", "*/there/src/there"]
+tests = ["tests", "*/there/tests"]
+
+[tool.coverage.report]
+exclude_lines = [
+  "no cov",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+]

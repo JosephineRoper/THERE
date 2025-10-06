@@ -1,0 +1,142 @@
+2025-07-22 14:54:25,170 INFO urbanaccess Checking GTFS text file header whitespace... Reading files using encoding: utf-8 set in configuration.
+2025-07-22 15:29:11,072 INFO urbanaccess Checking GTFS text file header whitespace... Reading files using encoding: utf-8 set in configuration.
+2025-07-22 15:29:11,316 INFO urbanaccess Removing whitespace from header(s) in: C:\Users\z3258367\OneDrive - UNSW\#PhD\Walkability\WalkTHERE\there\examples\Adelaide_gtfs_2.5.2025\stop_times.txt...
+2025-07-22 15:29:11,645 INFO urbanaccess GTFS text file header whitespace check completed. Took 0.57 seconds
+2025-07-22 15:29:11,650 INFO urbanaccess --------------------------------
+2025-07-22 15:29:11,650 INFO urbanaccess Processing GTFS feed: Adelaide_gtfs_2.5.2025
+2025-07-22 18:56:00,149 INFO urbanaccess Checking GTFS text file header whitespace... Reading files using encoding: utf-8 set in configuration.
+2025-07-22 18:56:00,325 INFO urbanaccess GTFS text file header whitespace check completed. Took 0.18 seconds
+2025-07-22 18:56:00,328 INFO urbanaccess --------------------------------
+2025-07-22 18:56:00,328 INFO urbanaccess Processing GTFS feed: Adelaide_gtfs_2.5.2025
+2025-07-22 18:56:01,211 INFO urbanaccess GTFS feed: Adelaide_gtfs_2.5.2025, calendar_dates uses the same service_id across multiple agency_ids. This feed calendar_dates table will be modified from its original format to provide service_ids for each agency using a one to many join
+2025-07-22 18:56:01,368 INFO urbanaccess GTFS feed: Adelaide_gtfs_2.5.2025, calendar uses the same service_id across multiple agency_ids. This feed calendar table will be modified from its original format to provide service_ids for each agency using a one to many join
+2025-07-22 18:56:03,295 INFO urbanaccess GTFS feed: Adelaide_gtfs_2.5.2025, stops uses the same stop_id across multiple agency_ids. This feed stops table will be modified from its original format to provide stop_ids for each agency using a one to many join
+2025-07-22 18:56:05,237 INFO urbanaccess agency.txt agency_name column has more than one agency name listed. Unique agency id was assigned using the agency id and associated agency name.
+2025-07-22 18:56:05,269 INFO urbanaccess Unique agency id operation complete. Took 4.31 seconds
+2025-07-22 18:56:05,289 INFO urbanaccess Unique GTFS feed id operation complete. Took 0.00 seconds
+2025-07-22 18:56:05,299 WARNING urbanaccess WARNING: Adelaide_gtfs_2.5.2025 GTFS feed stops: 189 of 9,886 (1.91 percent of total) record(s) are outside the bounding box coordinates
+2025-07-22 18:56:05,299 INFO urbanaccess Records:
+2025-07-22 18:56:05,324 INFO urbanaccess      stop_id            unique_agency_id  stop_code  \
+306     5488  school_service_-_southlink    15338.0   
+307     5488                   southlink    15338.0   
+308     5516  school_service_-_southlink    15366.0   
+309     5516                   southlink    15366.0   
+310     7304                   southlink    16670.0   
+...      ...                         ...        ...   
+1189  100787                   southlink    17882.0   
+1190  100790                   southlink    17885.0   
+1191  100792                   southlink    17887.0   
+1253  101272                   southlink    18363.0   
+4155  101237             torrens_transit    18328.0   
+
+                              stop_name                        stop_desc  \
+306   Stop 61 Mt Barker Rd - North side          2 Mt Barker Rd, Totness   
+307   Stop 61 Mt Barker Rd - North side          2 Mt Barker Rd, Totness   
+308     Stop 62 Adelaide Rd - East side     68 Adelaide Rd, Mount Barker   
+309     Stop 62 Adelaide Rd - East side     68 Adelaide Rd, Mount Barker   
+310     Stop 63 Adelaide Rd - East side  50-52 Adelaide Rd, Mount Barker   
+...                                 ...                              ...   
+1189    Stop 89 Thiele Ave - North side      24 Thiele Ave, Mount Barker   
+1190      Stop 90 Dumas St - North side     16-18 Dumas St, Mount Barker   
+1191      Stop 91 Dumas St - North side         4 Dumas St, Mount Barker   
+1253           Stop Cameron Rd Terminus       6 Cameron Rd, Mount Barker   
+4155   Stop 116 Osprey Pde - North side            36 Osprey Pde, Hewett   
+
+       stop_lat    stop_lon  zone_id  \
+306  -35.054230  138.851760      NaN   
+307  -35.054230  138.851760      NaN   
+308  -35.060520  138.852600      NaN   
+309  -35.060520  138.852600      NaN   
+310  -35.064380  138.854690      NaN   
+...         ...         ...      ...   
+1189 -35.071526  138.849178      NaN   
+1190 -35.070017  138.851197      NaN   
+1191 -35.069088  138.852885      NaN   
+1253 -35.064531  138.860963      NaN   
+4155 -34.571043  138.750882      NaN   
+
+                                              stop_url  location_type  \
+306   http://www.adelaidemetro.com.au/stops/view/15338            NaN   
+307   http://www.adelaidemetro.com.au/stops/view/15338            NaN   
+308   http://www.adelaidemetro.com.au/stops/view/15366            NaN   
+309   http://www.adelaidemetro.com.au/stops/view/15366            NaN   
+310   http://www.adelaidemetro.com.au/stops/view/16670            NaN   
+...                                                ...            ...   
+1189  http://www.adelaidemetro.com.au/stops/view/17882            NaN   
+1190  http://www.adelaidemetro.com.au/stops/view/17885            NaN   
+1191  http://www.adelaidemetro.com.au/stops/view/17887            NaN   
+1253  http://www.adelaidemetro.com.au/stops/view/18363            NaN   
+4155  http://www.adelaidemetro.com.au/stops/view/18328            NaN   
+
+      parent_station  stop_timezone  wheelchair_boarding  \
+306              NaN            NaN                  NaN   
+307              NaN            NaN                  NaN   
+308              NaN            NaN                  NaN   
+309              NaN            NaN                  NaN   
+310              NaN            NaN                  NaN   
+...              ...            ...                  ...   
+1189             NaN            NaN                  NaN   
+1190             NaN            NaN                  NaN   
+1191             NaN            NaN                  NaN   
+1253             NaN            NaN                  NaN   
+4155             NaN            NaN                  NaN   
+
+                unique_feed_id  
+306   adelaide_gtfs_2.5.2025_1  
+307   adelaide_gtfs_2.5.2025_1  
+308   adelaide_gtfs_2.5.2025_1  
+309   adelaide_gtfs_2.5.2025_1  
+310   adelaide_gtfs_2.5.2025_1  
+...                        ...  
+1189  adelaide_gtfs_2.5.2025_1  
+1190  adelaide_gtfs_2.5.2025_1  
+1191  adelaide_gtfs_2.5.2025_1  
+1253  adelaide_gtfs_2.5.2025_1  
+4155  adelaide_gtfs_2.5.2025_1  
+
+[189 rows x 14 columns]
+2025-07-22 18:56:05,332 INFO urbanaccess Removed identified stops that are outside of bounding box.
+2025-07-22 18:56:05,335 INFO urbanaccess Adelaide_gtfs_2.5.2025 GTFS feed stops: coordinates are in southeast hemisphere. Latitude = South (-90); Longitude = East (90).
+2025-07-22 18:56:05,812 INFO urbanaccess Appended route type to stops
+2025-07-22 18:56:06,075 INFO urbanaccess Appended route type to stop_times
+2025-07-22 18:56:06,147 INFO urbanaccess --------------------------------
+2025-07-22 18:56:06,290 INFO urbanaccess Added descriptive definitions to stops, routes, stop_times, and trips tables
+2025-07-22 18:56:08,462 INFO urbanaccess Successfully converted ['departure_time'] to seconds past midnight and appended new columns to stop_times. Took 2.17 seconds
+2025-07-22 18:56:08,480 INFO urbanaccess 1 GTFS feed file(s) successfully read as dataframes:
+2025-07-22 18:56:08,481 INFO urbanaccess      Adelaide_gtfs_2.5.2025
+2025-07-22 18:56:08,481 INFO urbanaccess      Took 8.33 seconds
+2025-07-22 18:56:08,496 WARNING urbanaccess WARNING: Time range passed: ['07:00:00', '12:00:00'] is a 5 hour period. Long periods over 3 hours may take a significant amount of time to process.
+2025-07-22 18:56:08,522 INFO urbanaccess Using calendar to extract service_ids to select trips.
+2025-07-22 18:56:08,525 INFO urbanaccess 57 service_ids were extracted from calendar
+2025-07-22 18:56:08,545 INFO urbanaccess 10,541 trip(s) 41.27 percent of 25,542 total trip records were found in calendar for GTFS feed(s): ['adelaide gtfs 2.5.2025']
+2025-07-22 18:56:08,545 WARNING urbanaccess NOTE: If you expected more trips to have been extracted and your GTFS feed(s) have a calendar_dates file, consider utilizing the calendar_dates_lookup parameter in order to add additional trips based on information inside of calendar_dates. This should only be done if you know the corresponding GTFS feed is using calendar_dates instead of calendar to specify service_ids. When in doubt do not use the calendar_dates_lookup parameter.
+2025-07-22 18:56:08,579 INFO urbanaccess 10,541 of 25,542 total trips were extracted representing calendar day: monday. Took 0.08 seconds
+2025-07-22 18:56:09,074 INFO urbanaccess There are no departure time records missing from trips following the specified schedule. There are no records to interpolate.
+2025-07-22 18:56:09,246 INFO urbanaccess Difference between stop times has been successfully calculated. Took 0.03 seconds
+2025-07-22 18:56:09,314 INFO urbanaccess Stop times from 07:00:00 to 12:00:00 successfully selected 137,469 records out of 160,361 total records (85.72 percent of total). Took 0.07 seconds
+2025-07-22 18:56:09,345 INFO urbanaccess Starting transformation process for 3,962 total trips...
+2025-07-22 18:56:25,002 INFO urbanaccess stop time table transformation to Pandana format edge table completed. Took 15.68 seconds
+2025-07-22 18:56:25,058 INFO urbanaccess Time conversion completed: seconds converted to minutes.
+2025-07-22 18:56:25,098 INFO urbanaccess 9,304 of 9,697 records selected from stops. Took 0.04 seconds
+2025-07-22 18:56:25,112 INFO urbanaccess stop time table transformation to Pandana format node table completed. Took 0.01 seconds
+2025-07-22 18:56:28,180 INFO urbanaccess route type successfully joined to transit edges. Took 3.07 seconds
+2025-07-22 18:56:28,380 INFO urbanaccess route id successfully joined to transit edges. Took 0.20 seconds
+2025-07-22 18:56:28,398 INFO urbanaccess Successfully created transit network. Took 19.90 seconds
+2025-07-22 18:56:28,420 WARNING urbanaccess WARNING: Time range passed: ['07:00:00', '12:00:00'] is a 5 hour period. Long periods over 3 hours may take a significant amount of time to process.
+2025-07-22 18:56:28,543 INFO urbanaccess Stop times from 07:00:00 to 12:00:00 successfully selected 137,469 records out of 160,361 total records (85.72 percent of total). Took 0.05 seconds
+2025-07-22 18:56:29,412 INFO urbanaccess Starting route stop headway calculation for 20,479 route stops...
+2025-07-22 18:58:37,110 INFO urbanaccess Route stop headway calculation complete. Took 128.32 seconds
+2025-07-22 18:58:41,268 INFO urbanaccess headway calculation complete. Took 132.85 seconds
+2025-07-22 18:58:42,607 INFO urbanaccess Created OSM network with travel time impedance using a travel speed of 1.875 MPH. Took 0.03 seconds
+2025-07-22 18:58:42,611 INFO urbanaccess Loaded UrbanAccess network components comprised of:
+2025-07-22 18:58:42,611 INFO urbanaccess      Transit: 9,304 nodes and 133,507 edges;
+2025-07-22 18:58:42,611 INFO urbanaccess      OSM: 149,839 nodes and 445,164 edges
+2025-07-22 18:58:43,330 INFO urbanaccess routes successfully joined to transit nodes. Took 0.56 seconds
+2025-07-22 18:59:15,995 INFO urbanaccess Connector edges between the OSM and transit network nodes successfully completed. Took 32.66 seconds
+2025-07-22 18:59:15,995 INFO urbanaccess mean route stop headway will be used for pedestrian to transit edge impedance.
+2025-07-22 18:59:16,219 INFO urbanaccess Headway impedance calculation completed. Took 0.22 seconds
+2025-07-22 18:59:24,207 INFO urbanaccess Edge and node tables formatted for Pandana with integer node ids: id_int, to_int, and from_int. Took 5.87 seconds
+2025-07-22 18:59:24,317 INFO urbanaccess Network edge and node network integration completed successfully resulting in a total of 170,317 nodes and 736,617 edges:
+2025-07-22 18:59:24,317 INFO urbanaccess      Transit: 20,478 nodes 133,507 edges;
+2025-07-22 18:59:24,317 INFO urbanaccess      OSM: 149,839 nodes 445,164 edges; and
+2025-07-22 18:59:24,317 INFO urbanaccess      OSM/Transit connector: 157,946 edges.

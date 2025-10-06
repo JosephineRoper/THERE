@@ -1,0 +1,5 @@
+Adelaide Metro GTFS Release Notes
+
+General Amendments:
+
+1)	Updated tram timetables to reflect Grade Seperation Project.
