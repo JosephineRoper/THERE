@@ -21,7 +21,8 @@ If employment or job numbers are available at a coarse scale (eg Destination Zon
 Data for other types of destinations is downloaded from OpenStreetMap, in the example notebooks provided, or can be uploaded from any other data sources you have available (or a combination used).
 
 ### Results
-The results of the index for walking for some Australian cities can currently be viewed at building level on the Colouring platform: for [Sydney](https://sydney.colouringaustralia.org/view/context/493004), [Adelaide](https://adelaide.colouringaustralia.org/view/context), and [Melbourne](https://melbourne.colouringaustralia.org/view/community/).
+The results of the index for walking for some Australian cities can currently be viewed at building level on the Colouring platform: for [Sydney](https://www.colouringaustralia.org/view/street-context), [Adelaide](https://adelaide.colouringaustralia.org/view/street-context), and [Melbourne](https://melbourne.colouringaustralia.org/view/street-context).
 
 An example of comparative results for four modes, in Edinburgh:
 ![Edinburgh 4 modes](https://user-images.githubusercontent.com/61174184/232359132-4ee3f094-df7e-4ff3-8f1f-c94d0fc7666a.jpeg)
+
