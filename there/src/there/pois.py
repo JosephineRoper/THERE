@@ -65,7 +65,7 @@ def poi_downloader(place, poi_dictionary, proj_crs, timeout=None):
 
     # keep your existing tag-merging logic (minimal change)
     tags = {}
-    for _, values in poi_dictionary.items():
+    for _category, values in poi_dictionary.items():
         tags = {x: values.get(x, []) + tags.get(x, []) for x in set(values).union(tags)}
 
     if isinstance(place, str):
@@ -212,3 +212,4 @@ def default_poi_params():
     df.set_index('category', inplace=True)
 
     return df
+
