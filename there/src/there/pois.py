@@ -60,41 +60,43 @@ def poi_downloader(place, poi_dictionary, proj_crs, timeout=None):
     # or a geodataframe containing a single polygon of the place's boundaries
 
     # changing timeout here changes setting for any subsequent use of OSMNx
-    # this seems unavoidable
     if isinstance(timeout, int):
         ox.settings.timeout = timeout
-    
+
+    # keep your existing tag-merging logic (minimal change)
     tags = {}
-    for category, values in poi_dictionary.items():
-        tags = {x: values.get(x,[]) + tags.get(x,[]) for x in set(values).union(tags)}
+    for _category, values in poi_dictionary.items():
+        tags = {x: values.get(x, []) + tags.get(x, []) for x in set(values).union(tags)}
 
-    if type(place) == str:
-        try:
-            gdf = ox.geometries_from_place(place, tags).to_crs(proj_crs)
-        except Exception as e:
-            print(f"Error downloading POIs for {place}: {e}")
-            raise ValueError("Check your internet connection and the place name. Try using osmnx.geocode_to_gdf(place) first and using the result with poi_downloader.")
-    elif type(place) == gpd.GeoDataFrame:
-        place = place.to_crs("EPSG:4326")
-        # I'm not sure why I'm doing this instead of using geometries_from_polygon. I think because it errors a lot.
-        bbox = place.bounds
-        bbox_pois = ox.geometries.geometries_from_bbox(bbox['maxy'][0], bbox['miny'][0], bbox['maxx'][0], bbox['minx'][0], tags)
-        gdf = gpd.clip(bbox_pois, place, keep_geom_type=False).to_crs(proj_crs)
-        #this doesn't work with multiple polygons, it dissolves them
+    if isinstance(place, str):
+        # OSMnx v2
+        gdf = ox.features_from_place(place, tags).to_crs(proj_crs)
+
+    elif isinstance(place, gpd.GeoDataFrame):
+        # OSMnx v2 expects bbox = (left, bottom, right, top) == (minx, miny, maxx, maxy)
+        place_wgs84 = place.to_crs("EPSG:4326")
+        b = place_wgs84.total_bounds  # [minx, miny, maxx, maxy]
+        bbox = (b[0], b[1], b[2], b[3])
+
+        bbox_pois = ox.features_from_bbox(bbox, tags)
+        gdf = gpd.clip(bbox_pois, place_wgs84, keep_geom_type=False).to_crs(proj_crs)
+
     else:
-        raise TypeError("'place' should be a string for querying OSM, or a geodataframe containing a polygon of the place boundaries.")
+        raise TypeError(
+            "'place' should be a string for querying OSM, or a GeoDataFrame containing a polygon of the place boundaries."
+        )
 
-    # OSM POIs include domestic swimming pools in some areas. This line removes swimming pools less than 100m2.
-    # Same for domestic tennis courts appearing as 'pitches'. Remove pitches below 450m2.
-    gdf = gdf[~((gdf['leisure']=='swimming_pool') & (gdf.area < 100))]
-    gdf = gdf[~((gdf['leisure']=='pitch') & (gdf.area < 450))]
-        
-    gdf['orig_geometry'] = gdf.geometry
-    # convert all to centroids
+    # Remove tiny likely-private pools/pitches, but only if column exists
+    if "leisure" in gdf.columns:
+        gdf = gdf[~((gdf["leisure"] == "swimming_pool") & (gdf.area < 100))]
+        gdf = gdf[~((gdf["leisure"] == "pitch") & (gdf.area < 450))]
+
+    gdf["orig_geometry"] = gdf.geometry
     gdf.geometry = gdf.centroid
 
-    # sometimes there is a multiindex with element_type returned. need to work out if this always happens.
-    gdf.index = gdf.index.droplevel('element_type')
+    # Drop element_type level if present
+    if getattr(gdf.index, "names", None) and "element_type" in gdf.index.names:
+        gdf.index = gdf.index.droplevel("element_type")
     return gdf
 
 def single_points(data_gdf, area_gdf=None):
@@ -208,4 +210,6 @@ def default_poi_params():
         'num_pois': [100, 25, 25, 25, 25]}
     df = pd.DataFrame(data)
     df.set_index('category', inplace=True)
+
     return df
+
