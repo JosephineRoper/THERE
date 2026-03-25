@@ -4,7 +4,7 @@ THERE is a collection of algorithms using the Python open-source geospatial ecos
 Roper, J., Ng, M., & Pettit, C. (2023). Incorporating diminishing returns to opportunities in access: Development of an open-source walkability index based on multi-activity accessibility. Journal of Transport and Land Use. 10.5198/jtlu.2023.2308
 
 ### Installation
-Binary installers are available through PyPI: pip install there-access
+Binary installers are available through PyPI: pip install there-access.
 Imports as there_access.
 
 ### Index principles
