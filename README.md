@@ -5,6 +5,7 @@ Roper, J., Ng, M., & Pettit, C. (2023). Incorporating diminishing returns to opp
 
 ### Installation
 Binary installers are available through PyPI: pip install there-access
+Imports as there_access.
 
 ### Index principles
 The index aims to answer the question "what percentage of people's total needs can they access by a given mode of transport from each location?". The principle of the model is to include all categories of destinations that are regular sources of travel, weighted according to trip frequency in travel surveys, preferably surveys specific to the area in question. The model therefore includes employment as a major travel destination.

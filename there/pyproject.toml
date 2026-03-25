@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "there-access"
+name = "there_access"
 dynamic = ["version"]
 description = 'Multimodal access framework using OpenStreetMap data'
 readme = "README.md"
@@ -32,7 +32,7 @@ Issues = "https://github.com/JosephineRoper/there/issues"
 Source = "https://github.com/JosephineRoper/there"
 
 [tool.hatch.version]
-path = "src/there/__about__.py"
+path = "src/there_access/__about__.py"
 
 [tool.hatch.envs.types]
 extra-dependencies = [
@@ -42,16 +42,16 @@ extra-dependencies = [
 check = "mypy --install-types --non-interactive {args:src/there tests}"
 
 [tool.coverage.run]
-source_pkgs = ["there", "tests"]
+source_pkgs = ["there_access", "tests"]
 branch = true
 parallel = true
 omit = [
-  "src/there/__about__.py",
+  "src/there_access/__about__.py",
 ]
 
 [tool.coverage.paths]
-there = ["src/there", "*/there/src/there"]
-tests = ["tests", "*/there/tests"]
+there = ["src/there_access", "*/there_access/src/there"]
+tests = ["tests", "*/there_access/tests"]
 
 [tool.coverage.report]
 exclude_lines = [
