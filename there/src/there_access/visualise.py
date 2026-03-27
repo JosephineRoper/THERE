@@ -23,7 +23,7 @@ def result_rounding(results):
                         and k != 'y'}}
     return results.round(rounding_dict)
 
-def export(folder, result, area, resultname, crs=proj_crs):
+def export(folder, result, area, resultname, crs="EPSG:32619"):
     result_gdf = gpd.GeoDataFrame(result_rounding(result), 
                                     geometry = gpd.GeoSeries.from_xy(result.x, result.y, crs=crs))
     result_gdf.to_file((folder + area + resultname + ".gpkg"), driver="GPKG")
