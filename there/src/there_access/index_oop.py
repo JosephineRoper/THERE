@@ -70,9 +70,15 @@ class AccessibilityCalculator:
     
     @staticmethod
     def calculate_diminishing_returns(attractiveness, dim_const):
-        """Calculate diminishing returns based on cumulative attractiveness."""
-        attractiveness_sum = (attractiveness.cumsum(axis=1) - attractiveness).astype(np.int64)
-        dim = np.array([(1-np.exp(-dim_const*(x+1))) - (1-np.exp(-dim_const*x)) for x in attractiveness_sum])
+        """Calculate diminishing returns based on cumulative attractiveness.
+
+        Returns each destination's share of 1 - exp(-dim_const * total attractiveness)
+        (Equation 2). Attractiveness is already included, so the result is not
+        multiplied by attractiveness again; this holds for count and weighted categories.
+        """
+        attractiveness_sum = attractiveness.cumsum(axis=1)
+        previous = attractiveness_sum - attractiveness
+        dim = np.exp(-dim_const*previous) - np.exp(-dim_const*attractiveness_sum)
         return dim
     
     @classmethod
@@ -82,7 +88,7 @@ class AccessibilityCalculator:
         attractiveness, there = cls.prepare_attraction_matrices(access, relevant_pois, num_pois)
         dim = cls.calculate_diminishing_returns(attractiveness, dim_const)
         
-        accessibility_score = (dim * attractiveness * impedance * there).sum(axis=1)
+        accessibility_score = (dim * impedance * there).sum(axis=1)
         return accessibility_score
 
 

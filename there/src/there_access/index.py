@@ -113,12 +113,15 @@ def _calculate_accessibility_score(access, relevant_pois, dist_const, dim_const,
     # are found (within distance), the returned poi_ids will be NaN for the remaining num_pois columns
     attractiveness = np.nan_to_num(attract.values, nan=0.0)
     there = np.nan_to_num(there_weight.values, nan=0.0)
-    attractiveness_sum = (attractiveness.cumsum(axis=1) - attractiveness).astype(np.int64)
-
-    dim = np.array([(1-np.exp(-dim_const*(x+1))) - (1-np.exp(-dim_const*x)) for x in attractiveness_sum])
+    # Diminishing returns (Equation 2): each destination's share is the gain in
+    # 1 - exp(-lambda * cumulative attractiveness) it brings. Attractiveness sits inside
+    # the exponential so this works for both count and weighted categories.
+    attractiveness_sum = attractiveness.cumsum(axis=1)
+    previous = attractiveness_sum - attractiveness
+    dim = np.exp(-dim_const*previous) - np.exp(-dim_const*attractiveness_sum)
 
     # Calculate the final accessibility score
-    accessibility_score = (dim*attractiveness*impedance*there).sum(axis=1)
+    accessibility_score = (dim*impedance*there).sum(axis=1)
     
     return accessibility_score
 
@@ -322,12 +325,12 @@ def test_transit_index(walk_network, integrated_network, pois, poi_dictionary, p
                 
                 attractiveness = np.nan_to_num(attract.values, nan=0.0)
                 prev_there = np.nan_to_num(there_weight.values, nan=0.0)
-                attractiveness_sum = (attractiveness.cumsum(axis=1) - attractiveness).astype(np.int64)
-
-                dim = np.array([(1-np.exp(-poi_lambdas[category]*(x+1))) - (1-np.exp(-poi_lambdas[category]*x)) for x in attractiveness_sum])
+                attractiveness_sum = attractiveness.cumsum(axis=1)
+                previous = attractiveness_sum - attractiveness
+                dim = np.exp(-poi_lambdas[category]*previous) - np.exp(-poi_lambdas[category]*attractiveness_sum)
 
                 # Calculate final score
-                accessibility_score = (dim*attractiveness*impedance*prev_there).sum(axis=1)
+                accessibility_score = (dim*impedance*prev_there).sum(axis=1)
                 
                 results[poi_variables[category]] = accessibility_score
                 results[cat_name] = weight * accessibility_score

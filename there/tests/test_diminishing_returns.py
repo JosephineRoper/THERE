@@ -18,22 +18,27 @@ NUM_POIS = 25
 CAP = 10_000      # search distance; pandana returns this value when fewer POIs are found
 
 
-def make_inputs(distances):
-    """One origin row with the given sorted distances; unused slots padded like pandana does."""
+def make_inputs(distances, weights=None):
+    """One origin row with the given sorted distances; unused slots padded like pandana does.
+
+    weights gives each destination's attractiveness; None means a count category.
+    """
     n = len(distances)
+    weights = [1] * n if weights is None else list(weights)
     dist_cols = list(distances) + [CAP] * (NUM_POIS - n)
     id_cols = list(range(n)) + [np.nan] * (NUM_POIS - n)
     access = pd.DataFrame(
         [dist_cols + id_cols],
         columns=list(range(1, NUM_POIS + 1)) + [f"poi{i}" for i in range(1, NUM_POIS + 1)],
     )
-    relevant_pois = pd.DataFrame({"attract": [1] * n, "chain_weight": [1] * n}, index=range(n))
+    relevant_pois = pd.DataFrame({"attract": weights, "chain_weight": [1] * n}, index=range(n))
     return access, relevant_pois
 
 
-def equation_2(distances, lam=LAMBDA, gamma=GAMMA):
-    j = np.arange(1, len(distances) + 1)
-    marginal = np.exp(-lam * (j - 1)) - np.exp(-lam * j)
+def equation_2(distances, weights=None, lam=LAMBDA, gamma=GAMMA):
+    weights = np.ones(len(distances)) if weights is None else np.asarray(weights, dtype=float)
+    cumulative = np.cumsum(weights)
+    marginal = np.exp(-lam * (cumulative - weights)) - np.exp(-lam * cumulative)
     return float((marginal * np.exp(-gamma * np.asarray(distances, dtype=float))).sum())
 
 
@@ -70,3 +75,17 @@ def test_category_can_approach_full_score(scorer):
     # previously capped at exp(-lambda) = 0.741
     access, pois = make_inputs([0] * NUM_POIS)
     assert float(SCORERS[scorer](access, pois)[0]) > 0.99
+
+
+@pytest.mark.parametrize("scorer", ["index", "index_oop"])
+def test_weighted_category_matches_equation_2(scorer):
+    # weighted category (eg. job counts): attractiveness enters the diminishing returns term
+    lam = 0.002
+    distances = [30, 150, 420, 600, 1100, 1900]
+    jobs = [120, 35.5, 800, 4, 260.25, 1500]
+    access, pois = make_inputs(distances, jobs)
+    if scorer == "index":
+        score = _calculate_accessibility_score(access, pois, GAMMA, lam, NUM_POIS, CAP)
+    else:
+        score = AccessibilityCalculator.calculate_score(access, pois, GAMMA, lam, NUM_POIS, CAP)
+    assert float(score[0]) == pytest.approx(equation_2(distances, jobs, lam=lam))
